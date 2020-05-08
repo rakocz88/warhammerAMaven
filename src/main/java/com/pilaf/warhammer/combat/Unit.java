@@ -41,10 +41,11 @@ public class Unit {
 
 
     public double calculateAttackChance(Unit target) {
-        double attackChange = 0.7 + ((this.attack
+        double attackChange = 0.7 + (((this.attack
                 - target.defence
-                + calculateBonus(target.size)) / 100
-                + ChargeHelper.calculateBonusAttack(this, target)
+                + calculateBonus(target.size)
+                + ChargeHelper.calculateBonusAttack(this, target))
+                * 0.01)
         );
         if (attackChange > 1) {
             attackChange = 1;
@@ -58,38 +59,38 @@ public class Unit {
     public double calculateAverageDamage(Unit target) {
         double apDamageComputed = this.apDamage;
         if (isMagicalOrFireAttack()) {
-            apDamageComputed = (this.apDamage
-                    + calculateBonusDamage(target.size, this.apDamage)
-                    + ChargeHelper.calculateBonusDamageAP(this, target)
-            )
+            apDamageComputed = damageWithBonuses(this.apDamage, target)
                     * calculateResistanceModifier(target.magicalResistance)
                     * calculateResistanceModifier(target.fireResistance);
         } else {
-            apDamageComputed = this.apDamage * calculateResistanceModifier(target.physicalResistance);
+            apDamageComputed = damageWithBonuses(this.apDamage, target) * calculateResistanceModifier(target.physicalResistance);
         }
         double standardDamageComputed = this.damage;
         if (isMagicalOrFireAttack()) {
-            standardDamageComputed = (this.damage
-                    + calculateBonusDamage(target.size, this.damage)
-                    + ChargeHelper.calculateBonusDamage(this, target)
-            )
+            standardDamageComputed = damageWithBonuses(this.damage, target)
                     * calculateResistanceModifier(target.magicalResistance)
                     * calculateResistanceModifier(target.fireResistance)
                     * calculateArmorReduction(target.armor);
         } else {
-            standardDamageComputed = (this.damage + calculateBonusDamage(target.size, this.damage))
+            standardDamageComputed = damageWithBonuses(this.damage, target)
                     * calculateResistanceModifier(target.physicalResistance)
                     * calculateArmorReduction(target.armor);
         }
         return apDamageComputed + standardDamageComputed;
     }
 
-    public double calculateSpeedModifier(){
+    public double damageWithBonuses(double damage, Unit target) {
+        return damage
+                + calculateBonusDamage(target.size, damage)
+                + ChargeHelper.calculateBonusDamage(damage, this, target);
+    }
+
+    public double calculateSpeedModifier() {
         return ATACK_BASE_INTERVAL / this.meleeInterval;
     }
 
-    public double calculateUnitAmountSizeBonus(Unit target){
-        if (this.unitAmount < target.getUnitAmount()){
+    public double calculateUnitAmountSizeBonus(Unit target) {
+        if (this.unitAmount < target.getUnitAmount()) {
             return 1;
         } else {
             return this.unitAmount / target.getUnitAmount();
@@ -108,7 +109,7 @@ public class Unit {
         return bonus;
     }
 
-    private double calculateBonusDamage(Size size, int damage) {
+    private double calculateBonusDamage(Size size, double damage) {
         double bonus = 0;
         if (size.equals(Size.INFANTRY)) {
             bonus += (this.bonusAgainstInfantry * (damage / (this.damage + this.apDamage)));
@@ -120,15 +121,15 @@ public class Unit {
     }
 
 
-    private double calculateArmorReduction(int armor) {
-        return (armor + (armor / 2)) / 2;
+    private double calculateArmorReduction(double armor) {
+        return 1 - (((armor + (armor / 2)) / 2) * 0.01);
     }
 
     private boolean isMagicalOrFireAttack() {
         return this.skillsList.contains(Skills.MAGICAL_ATTACK) || this.skillsList.contains(Skills.FIRE_ATTACK);
     }
 
-    private double calculateResistanceModifier(int resistance) {
+    private double calculateResistanceModifier(double resistance) {
         return ((100 - resistance) / 100);
 
     }

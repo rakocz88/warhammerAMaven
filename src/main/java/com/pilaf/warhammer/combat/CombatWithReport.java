@@ -23,13 +23,33 @@ public class CombatWithReport {
 
     private List<Unit> getUnitsToCompare() {
         return Arrays.asList(
-                UnitStore.Spearmens()
+                EmpireUnitStore.Spearmens(),
+                EmpireUnitStore.SpearmenShields(),
+                EmpireUnitStore.Flagellants(),
+                EmpireUnitStore.Swordsman(),
+                EmpireUnitStore.Halberdiers(),
+                EmpireUnitStore.Greatswords(),
+                EmpireUnitStore.EmpireKnights(),
+                EmpireUnitStore.Reiksguard(),
+                EmpireUnitStore.KnightsOfTheBlazingSun(),
+                EmpireUnitStore.DemigryphKnights(),
+                EmpireUnitStore.DemigryphKnightsHalberds()
         );
     }
 
     private List<Unit> getUnitsToCompareTo() {
         return Arrays.asList(
-                UnitStore.Spearmens()
+                EmpireUnitStore.Spearmens(),
+                EmpireUnitStore.SpearmenShields(),
+                EmpireUnitStore.Flagellants(),
+                EmpireUnitStore.Swordsman(),
+                EmpireUnitStore.Halberdiers(),
+                EmpireUnitStore.Greatswords(),
+                EmpireUnitStore.EmpireKnights(),
+                EmpireUnitStore.Reiksguard(),
+                EmpireUnitStore.KnightsOfTheBlazingSun(),
+                EmpireUnitStore.DemigryphKnights(),
+                EmpireUnitStore.DemigryphKnightsHalberds()
         );
     }
 

@@ -10,19 +10,13 @@ public class ChargeHelper {
         return unit.getAttack() * calculateChargeBonusModifier(unit.getChargeBonus());
     }
 
-    public static double calculateBonusDamage(Unit unit, Unit target){
+    public static double calculateBonusDamage(double damage, Unit unit, Unit target){
         if (shouldNotCalculateBonus(unit, target)){
             return 0;
         }
-        return unit.getDamage() * calculateChargeBonusModifier(unit.getChargeBonus()) * (unit.getDamage() / (unit.getDamage() + unit.getApDamage()));
+        return damage * calculateChargeBonusModifier(unit.getChargeBonus()) * (damage / (unit.getDamage() + unit.getApDamage()));
     }
 
-    public static double calculateBonusDamageAP(Unit unit, Unit target){
-        if (shouldNotCalculateBonus(unit, target)){
-            return 0;
-        }
-        return unit.getApDamage() * calculateChargeBonusModifier(unit.getChargeBonus()) * (unit.getApDamage() / (unit.getDamage() + unit.getApDamage()));
-    }
 
     private static boolean shouldNotCalculateBonus(Unit unit, Unit target) {
         return (CombatConfig.getChargeStatus() == ChargeStatus.NONE
@@ -42,6 +36,6 @@ public class ChargeHelper {
         } else if (CombatConfig.getChargeStatus() == ChargeStatus.STANDARD){
             sum = sum / (CHARGE_BONUS_TIMEOUT * 2);
         }
-        return sum / 100;
+        return sum /100;
     }
 }

@@ -4,6 +4,6 @@ public class CombatConfig {
 
 
     public static ChargeStatus getChargeStatus(){
-        return ChargeStatus.STANDARD;
+        return ChargeStatus.CYCLE;
     }
 }
