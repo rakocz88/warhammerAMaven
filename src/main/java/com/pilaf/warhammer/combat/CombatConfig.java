@@ -1,9 +1,14 @@
 package com.pilaf.warhammer.combat;
 
+
+import lombok.Value;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+
+@Value
 public class CombatConfig {
 
-
-    public static ChargeStatus getChargeStatus(){
-        return ChargeStatus.CYCLE;
-    }
+    private ChargeStatus chargeStatus;
+    private List<DisciplineModifier> disciplineModifierList;
 }

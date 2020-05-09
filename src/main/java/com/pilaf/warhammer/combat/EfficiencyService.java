@@ -1,9 +1,16 @@
 package com.pilaf.warhammer.combat;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+@Component
+@RequiredArgsConstructor
 public class EfficiencyService {
+
+    private final UnitService unitService;
 
     public Report calculateEfficiency(Unit unit1, Unit unit2){
         BigDecimal unit2DefenceEfficiency = calculateHitsToWin(unit1, unit2);
@@ -26,10 +33,10 @@ public class EfficiencyService {
 
     public BigDecimal calculateHitsToWin(Unit unit, Unit target){
         BigDecimal hitPointsToWin = BigDecimal.valueOf(target.getHitPointsPerUnit()).multiply(BigDecimal.valueOf(target.getUnitAmount()));
-        BigDecimal allAttackBonuses = BigDecimal.valueOf(unit.calculateAttackChance(target)).multiply(
-                BigDecimal.valueOf(unit.calculateAverageDamage(target))
-                .multiply(BigDecimal.valueOf(unit.calculateSpeedModifier()))
-                .multiply(BigDecimal.valueOf(unit.calculateUnitAmountSizeBonus(target)))
+        BigDecimal allAttackBonuses = BigDecimal.valueOf(unitService.calculateAttackChance(unit, target)).multiply(
+                BigDecimal.valueOf(unitService.calculateAverageDamage(unit, target))
+                .multiply(BigDecimal.valueOf(unitService.calculateSpeedModifier(unit)))
+                .multiply(BigDecimal.valueOf(unitService.calculateUnitAmountSizeBonus(unit, target)))
         );
         BigDecimal result =  hitPointsToWin.divide(allAttackBonuses, 0, RoundingMode.HALF_UP);
         return result;

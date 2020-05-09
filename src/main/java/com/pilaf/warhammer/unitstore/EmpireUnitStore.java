@@ -1,4 +1,4 @@
-package com.pilaf.warhammer.combat;
+package com.pilaf.warhammer.unitstore;
 
 import com.pilaf.warhammer.combat.Race;
 import com.pilaf.warhammer.combat.Size;
@@ -6,11 +6,18 @@ import com.pilaf.warhammer.combat.Skills;
 import com.pilaf.warhammer.combat.Unit;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class EmpireUnitStore {
 
+    public static List<Unit> all(){
+        return Arrays.asList(Spearmens(), SpearmenShields(), Swordsman(), Flagellants(), Halberdiers(),
+                Greatswords(), EmpireKnights(), Reiksguard(), KnightsOfTheBlazingSun(), DemigryphKnights(),
+                DemigryphKnightsHalberds());
+    }
+
     public static Unit Spearmens(){
-        return new Unit.UnitBuilder()
+        return Unit.builder()
                 .name("Spearmens")
                 .race(Race.EMPIRE)
                 .unitAmount(90)
@@ -33,7 +40,7 @@ public class EmpireUnitStore {
     }
 
     public static Unit SpearmenShields(){
-        return new Unit.UnitBuilder()
+        return  Unit.builder()
                 .name("SpearmenShields")
                 .race(Race.EMPIRE)
                 .unitAmount(90)
@@ -55,7 +62,7 @@ public class EmpireUnitStore {
     }
 
     public static Unit Swordsman(){
-        return new Unit.UnitBuilder()
+        return  Unit.builder()
                 .name("Swordsman")
                 .race(Race.EMPIRE)
                 .unitAmount(90)
@@ -76,7 +83,7 @@ public class EmpireUnitStore {
     }
 
     public static Unit Flagellants(){
-        return new Unit.UnitBuilder()
+        return  Unit.builder()
                 .name("flagellants")
                 .race(Race.EMPIRE)
                 .size(Size.INFANTRY)
@@ -97,7 +104,7 @@ public class EmpireUnitStore {
     }
 
     public static Unit Halberdiers(){
-        return new Unit.UnitBuilder()
+        return  Unit.builder()
                 .name("halberdier")
                 .race(Race.EMPIRE)
                 .size(Size.INFANTRY)
@@ -119,7 +126,7 @@ public class EmpireUnitStore {
     }
 
     public static Unit Greatswords(){
-        return new Unit.UnitBuilder()
+        return Unit.builder()
                 .name("Greatswords")
                 .race(Race.EMPIRE)
                 .size(Size.INFANTRY)
@@ -141,7 +148,7 @@ public class EmpireUnitStore {
     }
 
     public static Unit Reiksguard(){
-        return new Unit.UnitBuilder()
+        return Unit.builder()
                 .name("Reiksguard")
                 .race(Race.EMPIRE)
                 .size(Size.LARGE)
@@ -162,7 +169,7 @@ public class EmpireUnitStore {
     }
 
     public static Unit KnightsOfTheBlazingSun(){
-        return new Unit.UnitBuilder()
+        return Unit.builder()
                 .name("KnightsOfTheBlazingSun")
                 .race(Race.EMPIRE)
                 .size(Size.LARGE)
@@ -183,7 +190,7 @@ public class EmpireUnitStore {
     }
 
     public static Unit DemigryphKnights(){
-        return new Unit.UnitBuilder()
+        return Unit.builder()
                 .name("DemigryphKnights")
                 .race(Race.EMPIRE)
                 .size(Size.LARGE)
@@ -204,7 +211,7 @@ public class EmpireUnitStore {
     }
 
     public static Unit DemigryphKnightsHalberds(){
-        return new Unit.UnitBuilder()
+        return Unit.builder()
                 .name("DemigryphKnightsHalberds")
                 .race(Race.EMPIRE)
                 .size(Size.LARGE)
@@ -226,7 +233,7 @@ public class EmpireUnitStore {
     }
 
     public static Unit EmpireKnights(){
-        return new Unit.UnitBuilder()
+        return Unit.builder()
                 .name("EmpireKnights")
                 .race(Race.EMPIRE)
                 .size(Size.LARGE)
