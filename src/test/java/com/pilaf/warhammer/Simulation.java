@@ -25,10 +25,8 @@ public class Simulation {
     @Test
     void simulation1(){
         combatWithReport.init(
-                EmpireUnitStore.all(),
-                DarkElvenUnitStore.all()
-
-
+                Collections.singletonList(DarkElvenUnitStore.SistersOfSlaughter()),
+                EmpireUnitStore.all()
         );
 //        combatWithReport.init(
 //                Collections.singletonList(EmpireUnitStore.),

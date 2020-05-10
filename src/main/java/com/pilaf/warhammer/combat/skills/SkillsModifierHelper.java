@@ -66,8 +66,8 @@ public class SkillsModifierHelper {
 
     private double applyEffects(double stat, Unit unit, String methodToInvoke, Target target) {
         List<SkillsEffect> skillsEffectsList =  unit.getSkillsList().stream()
-                .filter(skills -> skills != null)
                 .map(skills -> skillsFactory.create(skills))
+                .filter(skills -> skills != null)
                 .filter(skillsEffect -> skillsEffect.getTarget() == target)
                 .collect(Collectors.toList());
         double calculatedStat = stat;

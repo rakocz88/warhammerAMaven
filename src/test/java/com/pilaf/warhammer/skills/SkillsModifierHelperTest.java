@@ -30,6 +30,7 @@ public class SkillsModifierHelperTest {
         assertThat(attackEffect).isEqualTo(108);
     }
 
+
     @Test
     void shouldFrenzyIncreaseDamage(){
         Unit unit1 = Unit.builder().skillsList(
@@ -64,6 +65,18 @@ public class SkillsModifierHelperTest {
         ).attack(100).damage(100).apDamage(100).hitPointsPerUnit(100).unitAmount(10).defence(100).speed(100).build();
         int damage = (int) Math.round(skillsModifierHelper.calculateDamageAfterEffect(100, unit1, unit2));
         assertThat(damage).isEqualTo(80);
+    }
+
+    @Test
+    void shouldDecreaseDefence2(){
+        Unit unit1 = Unit.builder().skillsList(
+                Arrays.asList(Skills.MADNESS_OF_KHAINE)
+        ).attack(100).damage(100).apDamage(100).hitPointsPerUnit(100).unitAmount(10).defence(100).speed(100).build();
+        Unit unit2 = Unit.builder().skillsList(
+                Arrays.asList()
+        ).attack(100).damage(100).apDamage(100).hitPointsPerUnit(100).unitAmount(10).defence(100).speed(100).build();
+        int defence = (int) Math.round(skillsModifierHelper.calculateDefenceAfterEffect(100, unit2, unit1));
+        assertThat(defence).isEqualTo(90);
     }
 
     @Test

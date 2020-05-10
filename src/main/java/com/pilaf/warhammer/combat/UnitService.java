@@ -1,5 +1,7 @@
 package com.pilaf.warhammer.combat;
 
+import com.pilaf.warhammer.combat.skills.SkillsModifierHelper;
+import com.pilaf.warhammer.combat.skills.Target;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -8,15 +10,11 @@ import org.springframework.stereotype.Component;
 public class UnitService {
 
     private final ChargeHelper chargeHelper;
+    private final SkillsModifierHelper skillsModifierHelper;
     private static final int ATTACK_BASE_INTERVAL = 10;
 
     public double calculateAttackChance(Unit unit, Unit target) {
-        double attackChange = 0.7 + (((unit.getAttack()
-                - target.getDefence()
-                + calculateBonus(unit, target.getSize())
-                + chargeHelper.calculateBonusAttack(unit, target))
-                * 0.01)
-        );
+        double attackChange = 0.7 + (calculateAttackModifier(unit, target) * 0.01);
         if (attackChange > 1) {
             attackChange = 1;
         } else if (attackChange < 0.05) {
@@ -25,35 +23,50 @@ public class UnitService {
         return attackChange;
     }
 
+    private double calculateAttackModifier(Unit unit, Unit target) {
+        double attackSum = (
+                unit.getAttack()
+                        + calculateBonus(unit, target.getSize())
+                        + chargeHelper.calculateBonusAttack(unit, target));
+        double attackSumAfterEffects = skillsModifierHelper.calculateAttackAfterEffect(attackSum, unit, target);
+        // fixme charge will not be calculated from skills
+        double defenceSumAfterEffect = skillsModifierHelper.calculateDefenceAfterEffect(target.getDefence(), target, unit);
+        return attackSumAfterEffects - defenceSumAfterEffect;
+    }
+
 
     public double calculateAverageDamage(Unit unit, Unit target) {
         double apDamageComputed = unit.getApDamage();
         // todo fix fire attacks
         if (isMagicalOrFireAttack(unit)) {
-            apDamageComputed = damageWithBonuses(unit.getApDamage(),unit,  target)
+            apDamageComputed = damageWithBonuses(unit.getApDamage(), unit, target)
                     * calculateResistanceModifier(target.getMagicalResistance())
                     * calculateResistanceModifier(target.getFireResistance());
         } else {
-            apDamageComputed = damageWithBonuses(unit.getApDamage(), unit,  target) * calculateResistanceModifier(target.getPhysicalResistance());
+            apDamageComputed = damageWithBonuses(unit.getApDamage(), unit, target) * calculateResistanceModifier(target.getPhysicalResistance());
         }
         double standardDamageComputed = unit.getDamage();
         if (isMagicalOrFireAttack(unit)) {
             standardDamageComputed = damageWithBonuses(unit.getDamage(), unit, target)
                     * calculateResistanceModifier(target.getMagicalResistance())
                     * calculateResistanceModifier(target.getFireResistance())
-                    * calculateArmorReduction(target.getArmor());
+                    * calculateArmorReduction(
+                    target.getArmor(), unit, target
+            );
         } else {
-            standardDamageComputed = damageWithBonuses(unit.getDamage(), unit,  target)
+            standardDamageComputed = damageWithBonuses(unit.getDamage(), unit, target)
                     * calculateResistanceModifier(target.getPhysicalResistance())
-                    * calculateArmorReduction(target.getArmor());
+                    * calculateArmorReduction(target.getArmor(), unit, target);
         }
         return apDamageComputed + standardDamageComputed;
     }
 
     public double damageWithBonuses(double damage, Unit unit, Unit target) {
-        return damage
+        double damageSummary = damage
                 + calculateBonusDamage(unit, target.getSize(), damage)
+                // fixme chargebonus will not be applied from skills
                 + chargeHelper.calculateBonusDamage(damage, unit, target);
+        return skillsModifierHelper.calculateDamageAfterEffect(damage, unit, target);
     }
 
     public double calculateSpeedModifier(Unit unit) {
@@ -80,7 +93,7 @@ public class UnitService {
         return bonus;
     }
 
-    private double calculateBonusDamage( Unit unit, Size size,  double damage) {
+    private double calculateBonusDamage(Unit unit, Size size, double damage) {
         double bonus = 0;
         if (size.equals(Size.INFANTRY)) {
             bonus += (unit.getBonusAgainstInfantry() * (damage / (unit.getDamage() + unit.getApDamage())));
@@ -92,8 +105,9 @@ public class UnitService {
     }
 
 
-    private double calculateArmorReduction(double armor) {
-        return 1 - (((armor + (armor / 2)) / 2) * 0.01);
+    private double calculateArmorReduction(double armor, Unit unit, Unit target) {
+        double modifiedArmor = skillsModifierHelper.calculateArmorAfterEffect(armor, unit, target);
+        return 1 - (((modifiedArmor + (modifiedArmor / 2)) / 2) * 0.01);
     }
 
     private boolean isMagicalOrFireAttack(Unit unit) {
