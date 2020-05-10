@@ -11,6 +11,8 @@ import java.math.RoundingMode;
 public class EfficiencyService {
 
     private final UnitService unitService;
+    private final DisciplineHelper disciplineHelper;
+    public static final int EFFICIENCY_STANDARD = 100;
 
     public Report calculateEfficiency(Unit unit1, Unit unit2){
         BigDecimal unit2DefenceEfficiency = calculateHitsToWin(unit1, unit2);
@@ -19,11 +21,19 @@ public class EfficiencyService {
 
         return new Report(unit1.getName(),
                 unit2.getName(),
-                unit1DefenceEfficiency,
-                unit2DefenceEfficiency,
+                toAttackEfficiency(unit2DefenceEfficiency),
+                toDefenceEfficiency(unit1DefenceEfficiency),
                 overallUnit1Efficiency,
                 calculateEfficiencyGold(overallUnit1Efficiency, unit1.getCost(), unit2.getCost())
         );
+    }
+
+    private BigDecimal toDefenceEfficiency(BigDecimal unit1DefenceEfficiency) {
+        return unit1DefenceEfficiency.divide(BigDecimal.valueOf(EFFICIENCY_STANDARD), 2, RoundingMode.HALF_UP);
+    }
+
+    private BigDecimal toAttackEfficiency(BigDecimal unit2DefenceEfficiency) {
+        return BigDecimal.valueOf(EFFICIENCY_STANDARD).divide(unit2DefenceEfficiency, 2, RoundingMode.HALF_UP);
     }
 
     private BigDecimal calculateEfficiencyGold(BigDecimal overallEfficiency, int cost, int unit2Cost) {
@@ -32,7 +42,8 @@ public class EfficiencyService {
     }
 
     public BigDecimal calculateHitsToWin(Unit unit, Unit target){
-        BigDecimal hitPointsToWin = BigDecimal.valueOf(target.getHitPointsPerUnit()).multiply(BigDecimal.valueOf(target.getUnitAmount()));
+        //BigDecimal hitPointsToWin = BigDecimal.valueOf(target.getHitPointsPerUnit()).multiply(BigDecimal.valueOf(target.getUnitAmount()));
+        BigDecimal hitPointsToWin = BigDecimal.valueOf(disciplineHelper.calculateDamageToHitToLoseDiscipline(target));
         BigDecimal allAttackBonuses = BigDecimal.valueOf(unitService.calculateAttackChance(unit, target)).multiply(
                 BigDecimal.valueOf(unitService.calculateAverageDamage(unit, target))
                 .multiply(BigDecimal.valueOf(unitService.calculateSpeedModifier(unit)))

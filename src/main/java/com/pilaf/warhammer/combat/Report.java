@@ -10,8 +10,8 @@ import java.math.BigDecimal;
 public class Report {
     private String unit1;
     private String unit2;
-    private BigDecimal unit1DefenceEfficiency;
-    private BigDecimal unit2DefenceEfficiency;
+    private BigDecimal attackEfficiency;
+    private BigDecimal defenceEfficiency;
     private BigDecimal overallScore;
     private BigDecimal efficiencyGold;
 }

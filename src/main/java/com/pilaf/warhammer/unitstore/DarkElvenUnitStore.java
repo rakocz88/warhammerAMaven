@@ -12,7 +12,8 @@ public class DarkElvenUnitStore {
 
     public static List<Unit> all(){
         return Arrays.asList(
-                Bleakswords(), Dreadspears(), BlackArkCorsairs(), WitchElves(), SistersOfSlaughter(), HarGanethExecutioners(), BlackGuardOfNaggarond()
+                Bleakswords(), Dreadspears(), BlackArkCorsairs(), WitchElves(), SistersOfSlaughter(), HarGanethExecutioners(), BlackGuardOfNaggarond(),
+                DarkRiders(), DarkRidersShields(), ColdOneKnights(), DoomfireWarlocks(), ColdOneDreadKnights()
         );
     }
 
@@ -122,7 +123,7 @@ public class DarkElvenUnitStore {
                 .apDamage(11)
                 .meleeInterval(4.5)
                 .armor(5)
-                .skillsList(Arrays.asList( Skills.MURDEROUS_MASTERY))
+                .skillsList(Arrays.asList( Skills.MURDEROUS_MASTERY, Skills.POISON_ATTACK))
                 .build();
     }
 
@@ -167,6 +168,115 @@ public class DarkElvenUnitStore {
                 .armor(100)
                 .bonusAgainstLarge(24)
                 .skillsList(Arrays.asList( Skills.CHARGE_DEFENCE_AGAINST_LARGE, Skills.IMMUNE_TO_PSYCHOLOGY, Skills.MURDEROUS_MASTERY))
+                .build();
+    }
+
+
+    public static Unit DarkRiders(){
+        return  Unit.builder()
+                .name("DarkRiders")
+                .race(Race.DARK_ELVES)
+                .size(Size.LARGE)
+                .unitAmount(45)
+                .cost(450)
+                .hitPointsPerUnit(73)
+                .leadership(52)
+                .speed(92)
+                .attack(24)
+                .defence(22)
+                .chargeBonus(40)
+                .damage(20)
+                .apDamage(6)
+                .meleeInterval(4.5)
+                .armor(30)
+                .skillsList(Arrays.asList(Skills.MURDEROUS_MASTERY))
+                .build();
+    }
+
+    public static Unit DarkRidersShields(){
+        return  Unit.builder()
+                .name("DarkRidersShields")
+                .race(Race.DARK_ELVES)
+                .size(Size.LARGE)
+                .unitAmount(45)
+                .cost(500)
+                .hitPointsPerUnit(73)
+                .leadership(52)
+                .speed(92)
+                .attack(24)
+                .defence(28)
+                .chargeBonus(40)
+                .damage(20)
+                .apDamage(6)
+                .meleeInterval(4.5)
+                .armor(30)
+                .skillsList(Arrays.asList( Skills.BRONZE_SHIELD,  Skills.MURDEROUS_MASTERY))
+                .build();
+    }
+
+    public static Unit ColdOneKnights(){
+        return  Unit.builder()
+                .name("ColdOneKnights")
+                .race(Race.DARK_ELVES)
+                .size(Size.LARGE)
+                .unitAmount(36)
+                .cost(1000)
+                .hitPointsPerUnit(120)
+                .leadership(75)
+                .speed(62)
+                .attack(29)
+                .defence(26)
+                .chargeBonus(44)
+                .damage(12)
+                .apDamage(30)
+                .meleeInterval(4.2)
+                .armor(100)
+                .bonusAgainstLarge(14)
+                .skillsList(Arrays.asList( Skills.CAUSE_FEAR,  Skills.BRONZE_SHIELD,
+                        Skills.MURDEROUS_MASTERY, Skills.PRIMAL_INSTINCTS))
+                .build();
+    }
+
+    public static Unit DoomfireWarlocks(){
+        return  Unit.builder()
+                .name("DoomfireWarlocks")
+                .race(Race.DARK_ELVES)
+                .size(Size.LARGE)
+                .unitAmount(45)
+                .cost(1100)
+                .hitPointsPerUnit(74)
+                .leadership(65)
+                .speed(92)
+                .attack(32)
+                .defence(22)
+                .chargeBonus(40)
+                .damage(32)
+                .apDamage(13)
+                .meleeInterval(4.5)
+                .armor(15)
+                .physicalResistance(40)
+                .skillsList(Arrays.asList( Skills.SOUL_DECAY, Skills.MAGICAL_ATTACK, Skills.MURDEROUS_MASTERY, Skills.POISON_ATTACK))
+                .build();
+    }
+
+    public static Unit ColdOneDreadKnights(){
+        return  Unit.builder()
+                .name("ColdOneDreadKnights")
+                .race(Race.DARK_ELVES)
+                .size(Size.LARGE)
+                .unitAmount(36)
+                .cost(1300)
+                .hitPointsPerUnit(120)
+                .leadership(80)
+                .speed(66)
+                .attack(39)
+                .defence(42)
+                .chargeBonus(36)
+                .damage(14)
+                .apDamage(34)
+                .meleeInterval(4.3)
+                .armor(120)
+                .skillsList(Arrays.asList( Skills.BRONZE_SHIELD, Skills.PRIMAL_INSTINCTS, Skills.MURDEROUS_MASTERY))
                 .build();
     }
 }

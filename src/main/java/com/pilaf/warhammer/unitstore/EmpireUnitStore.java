@@ -6,6 +6,7 @@ import com.pilaf.warhammer.combat.Skills;
 import com.pilaf.warhammer.combat.Unit;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class EmpireUnitStore {
@@ -14,6 +15,27 @@ public class EmpireUnitStore {
         return Arrays.asList(Spearmens(), SpearmenShields(), Swordsman(), Flagellants(), Halberdiers(),
                 Greatswords(), EmpireKnights(), Reiksguard(), KnightsOfTheBlazingSun(), DemigryphKnights(),
                 DemigryphKnightsHalberds());
+    }
+
+    public static Unit test(){
+        return Unit.builder()
+                .name("Test")
+                .race(Race.EMPIRE)
+                .unitAmount(100)
+                .armor(30)
+                .size(Size.INFANTRY)
+                .meleeInterval(5.0)
+                .hitPointsPerUnit(50)
+                .leadership(50)
+                .speed(30)
+                .attack(25)
+                .defence(25)
+                .chargeBonus(0)
+                .damage(12)
+                .apDamage(12)
+                .skillsList(Collections.emptyList())
+                .cost(300)
+                .build();
     }
 
     public static Unit Spearmens(){

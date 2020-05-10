@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data()
@@ -15,8 +16,6 @@ public class Unit {
 
     @Autowired
     private ChargeHelper chargeHelper;
-
-
 
     private String name;
     private Race race;
@@ -38,12 +37,13 @@ public class Unit {
     private int maxUnitAttackAmount;
     private int bonusAgainstLarge;
     private int bonusAgainstInfantry;
-    private List<Skills> skillsList;
+    private List<Skills> skillsList = new ArrayList<>();
     private int cost;
     private int range;
     private int missileDamage;
     private int apMissileDamage;
     private int accuracy;
+    private int missileAmount;
 
 
 
