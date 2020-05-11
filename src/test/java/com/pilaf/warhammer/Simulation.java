@@ -4,6 +4,7 @@ import com.pilaf.warhammer.combat.*;
 import com.pilaf.warhammer.unitstore.DarkElvenUnitStore;
 import com.pilaf.warhammer.unitstore.DwarfsUnitStore;
 import com.pilaf.warhammer.unitstore.EmpireUnitStore;
+import com.pilaf.warhammer.unitstore.GreenskinsUnitStore;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +27,11 @@ public class Simulation {
     void simulation1() {
         List<Unit> listA = new ArrayList<>();
         List<Unit> listB = new ArrayList<>();
-        listA.add(DwarfsUnitStore.Hammerers());
-        listB.addAll(EmpireUnitStore.all());
-        listB.addAll(DarkElvenUnitStore.all());
-        listB.addAll(DwarfsUnitStore.all());
+        listA.addAll(DwarfsUnitStore.all());
+//        listA.add(EmpireUnitStore.test());
+//        listB.add(EmpireUnitStore.test());
+//        listB.addAll(DarkElvenUnitStore.all());
+        listB.addAll(GreenskinsUnitStore.all());
         combatWithReport.init(
                listA,
                listB

@@ -186,7 +186,7 @@ public class DwarfsUnitStore {
                 .race(Race.DWARFS)
                 .size(Size.INFANTRY)
                 .unitAmount(75)
-                .cost(1200)
+                .cost(1100)
                 .hitPointsPerUnit(92)
                 .leadership(80)
                 .speed(28)

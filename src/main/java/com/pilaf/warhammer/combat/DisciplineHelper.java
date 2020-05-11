@@ -25,13 +25,16 @@ public class DisciplineHelper {
     }
 
     public int calculateDamageToHitToLoseDiscipline(Unit unit) {
+        if (unit.getSkillsList().contains(Skills.UNBREAKABLE)){
+            return unit.getHitPointsPerUnit() * unit.getUnitAmount();
+        }
         int initialPenalty = sumUpInitialPenalty();
         int disciplineLeft = unit.getLeadership() + initialPenalty;
         return calculateDamageUnitUnitLosesAllLeadership(unit, disciplineLeft);
     }
 
     private int calculateDamageUnitUnitLosesAllLeadership(Unit unit, int disciplineLeft) {
-        double percentReachableBeforeLeadershipIsZero = (1 - (0.9 - (((double) disciplineLeft) / 100)));
+        double percentReachableBeforeLeadershipIsZero = (1 - (0.75 - (((double) disciplineLeft) / 100)));
         int damageBeforeLeadershipIsZero =  (int) Math.round(unit.getHitPointsPerUnit() * unit.getUnitAmount() * percentReachableBeforeLeadershipIsZero);
         return damageBeforeLeadershipIsZero > (unit.getUnitAmount() * unit.getHitPointsPerUnit())
                 ? (unit.getUnitAmount() * unit.getHitPointsPerUnit())

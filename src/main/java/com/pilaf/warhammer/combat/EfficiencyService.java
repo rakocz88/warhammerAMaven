@@ -1,6 +1,7 @@
 package com.pilaf.warhammer.combat;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -8,11 +9,12 @@ import java.math.RoundingMode;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class EfficiencyService {
 
     private final UnitService unitService;
     private final DisciplineHelper disciplineHelper;
-    public static final int EFFICIENCY_STANDARD = 100;
+    public static final int EFFICIENCY_STANDARD = 300;
 
     public Report calculateEfficiency(Unit unit1, Unit unit2){
         BigDecimal unit2DefenceEfficiency = calculateHitsToWin(unit1, unit2);
@@ -49,7 +51,11 @@ public class EfficiencyService {
                 .multiply(BigDecimal.valueOf(unitService.calculateSpeedModifier(unit)))
                 .multiply(BigDecimal.valueOf(unitService.calculateUnitAmountSizeBonus(unit, target)))
         );
+
         BigDecimal result =  hitPointsToWin.divide(allAttackBonuses, 0, RoundingMode.HALF_UP);
+        log.info("All attack values {} to {} is {}", unit.getName(), target.getName(), allAttackBonuses);
+        log.info("Hit points to reach {} to {} is {}", unit.getName(), target.getName(), hitPointsToWin);
+        log.info("hit to win {} {} is {}", unit.getName(), target.getName(), result);
         return result;
        }
 }

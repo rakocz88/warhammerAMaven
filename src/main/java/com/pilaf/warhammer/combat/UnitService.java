@@ -3,10 +3,12 @@ package com.pilaf.warhammer.combat;
 import com.pilaf.warhammer.combat.skills.SkillsModifierHelper;
 import com.pilaf.warhammer.combat.skills.Target;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class UnitService {
 
     private final ChargeHelper chargeHelper;
@@ -14,13 +16,14 @@ public class UnitService {
     private static final int ATTACK_BASE_INTERVAL = 10;
 
     public double calculateAttackChance(Unit unit, Unit target) {
-        double attackChange = 0.4 + (calculateAttackModifier(unit, target) * 0.01);
-        if (attackChange > 0.9) {
-            attackChange = 0.9;
-        } else if (attackChange < 0.1) {
-            attackChange = 0.1;
+        double attackChance = 0.4 + (calculateAttackModifier(unit, target) * 0.01);
+        if (attackChance > 0.9) {
+            attackChance = 0.9;
+        } else if (attackChance < 0.1) {
+            attackChance = 0.1;
         }
-        return attackChange;
+        log.info("Chance to {} hit {} is {}", unit.getName(), target.getName(), attackChance);
+        return attackChance;
     }
 
     private double calculateAttackModifier(Unit unit, Unit target) {
@@ -58,6 +61,7 @@ public class UnitService {
                     * calculateResistanceModifier(target.getPhysicalResistance())
                     * calculateArmorReduction(target.getArmor(), unit, target);
         }
+        log.info("Average Damage {} on {} is {}", unit.getName(), target.getName(), apDamageComputed + standardDamageComputed);
         return apDamageComputed + standardDamageComputed;
     }
 
@@ -66,7 +70,7 @@ public class UnitService {
                 + calculateBonusDamage(unit, target.getSize(), damage)
                 // fixme chargebonus will not be applied from skills
                 + chargeHelper.calculateBonusDamage(damage, unit, target);
-        return skillsModifierHelper.calculateDamageAfterEffect(damage, unit, target);
+        return skillsModifierHelper.calculateDamageAfterEffect(damageSummary, unit, target);
     }
 
     public double calculateSpeedModifier(Unit unit) {
