@@ -14,11 +14,11 @@ public class UnitService {
     private static final int ATTACK_BASE_INTERVAL = 10;
 
     public double calculateAttackChance(Unit unit, Unit target) {
-        double attackChange = 0.7 + (calculateAttackModifier(unit, target) * 0.01);
-        if (attackChange > 1) {
-            attackChange = 1;
-        } else if (attackChange < 0.05) {
-            attackChange = 0.05;
+        double attackChange = 0.4 + (calculateAttackModifier(unit, target) * 0.01);
+        if (attackChange > 0.9) {
+            attackChange = 0.9;
+        } else if (attackChange < 0.1) {
+            attackChange = 0.1;
         }
         return attackChange;
     }

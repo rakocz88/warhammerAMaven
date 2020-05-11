@@ -138,7 +138,7 @@ public class DarkElvenUnitStore {
                 .leadership(82)
                 .speed(31)
                 .attack(38)
-                .defence(36)
+                .defence(34)
                 .chargeBonus(24)
                 .damage(13)
                 .apDamage(29)
