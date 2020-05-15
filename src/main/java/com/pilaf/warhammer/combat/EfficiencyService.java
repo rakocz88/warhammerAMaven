@@ -14,20 +14,21 @@ public class EfficiencyService {
 
     private final UnitService unitService;
     private final DisciplineHelper disciplineHelper;
-    public static final int EFFICIENCY_STANDARD = 300;
+    private final UnitSizeAttackHelper unitSizeAttackHelper;
+    public static final int EFFICIENCY_STANDARD = 285;
 
-    public Report calculateEfficiency(Unit unit1, Unit unit2){
-        BigDecimal unit2DefenceEfficiency = calculateHitsToWin(unit1, unit2);
-        BigDecimal unit1DefenceEfficiency = calculateHitsToWin(unit2, unit1);
-        BigDecimal overallUnit1Efficiency = unit1DefenceEfficiency.divide(unit2DefenceEfficiency, 2 ,RoundingMode.HALF_UP);
-
-        return new Report(unit1.getName(),
-                unit2.getName(),
-                toAttackEfficiency(unit2DefenceEfficiency),
-                toDefenceEfficiency(unit1DefenceEfficiency),
-                overallUnit1Efficiency,
-                calculateEfficiencyGold(overallUnit1Efficiency, unit1.getCost(), unit2.getCost())
-        );
+    public Report calculateEfficiency(Unit unit1, Unit unit2) {
+        Report report = new Report();
+        BigDecimal unit2DefenceEfficiency = calculateHitsToWin(unit1, unit2, report);
+        BigDecimal unit1DefenceEfficiency = calculateHitsToWin(unit2, unit1, null);
+        BigDecimal overallUnit1Efficiency = unit1DefenceEfficiency.divide(unit2DefenceEfficiency, 2, RoundingMode.HALF_UP);
+        report.setUnit1(unit1.getName());
+        report.setUnit2(unit2.getName());
+        report.setAttackEfficiency(toAttackEfficiency(unit2DefenceEfficiency));
+        report.setDefenceEfficiency(toDefenceEfficiency(unit1DefenceEfficiency));
+        report.setOverallScore(overallUnit1Efficiency);
+        report.setEfficiencyGold(calculateEfficiencyGold(overallUnit1Efficiency, unit1.getCost(), unit2.getCost()));
+        return report;
     }
 
     private BigDecimal toDefenceEfficiency(BigDecimal unit1DefenceEfficiency) {
@@ -43,19 +44,24 @@ public class EfficiencyService {
         return multiplied.divide(new BigDecimal(cost), 2, RoundingMode.HALF_UP);
     }
 
-    public BigDecimal calculateHitsToWin(Unit unit, Unit target){
-        //BigDecimal hitPointsToWin = BigDecimal.valueOf(target.getHitPointsPerUnit()).multiply(BigDecimal.valueOf(target.getUnitAmount()));
+    public BigDecimal calculateHitsToWin(Unit unit, Unit target, Report report) {
         BigDecimal hitPointsToWin = BigDecimal.valueOf(disciplineHelper.calculateDamageToHitToLoseDiscipline(target));
-        BigDecimal allAttackBonuses = BigDecimal.valueOf(unitService.calculateAttackChance(unit, target)).multiply(
-                BigDecimal.valueOf(unitService.calculateAverageDamage(unit, target))
-                .multiply(BigDecimal.valueOf(unitService.calculateSpeedModifier(unit)))
-                .multiply(BigDecimal.valueOf(unitService.calculateUnitAmountSizeBonus(unit, target)))
-        );
+        BigDecimal attackChance = BigDecimal.valueOf(unitService.calculateAttackChance(unit, target)).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal averageDamage = BigDecimal.valueOf(unitService.calculateAverageDamage(unit, target)).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal speedMod = BigDecimal.valueOf(unitService.calculateSpeedModifier(unit)).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal unitAmountMod = unitSizeAttackHelper.calculateUnitAmountSizeBonus(unit, target);
 
-        BigDecimal result =  hitPointsToWin.divide(allAttackBonuses, 0, RoundingMode.HALF_UP);
-        log.info("All attack values {} to {} is {}", unit.getName(), target.getName(), allAttackBonuses);
-        log.info("Hit points to reach {} to {} is {}", unit.getName(), target.getName(), hitPointsToWin);
-        log.info("hit to win {} {} is {}", unit.getName(), target.getName(), result);
+        BigDecimal allAttackBonuses = attackChance
+                .multiply(averageDamage)
+                .multiply(speedMod)
+                .multiply(unitAmountMod);
+        if (report != null){
+            report.setChangeToHit(attackChance);
+            report.setAverageDamage(averageDamage);
+            report.setUnitAmountModifier(unitAmountMod);
+        }
+
+        BigDecimal result = hitPointsToWin.divide(allAttackBonuses, 0, RoundingMode.HALF_UP);
         return result;
-       }
+    }
 }

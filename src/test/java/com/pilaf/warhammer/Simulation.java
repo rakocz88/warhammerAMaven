@@ -1,10 +1,7 @@
 package com.pilaf.warhammer;
 
 import com.pilaf.warhammer.combat.*;
-import com.pilaf.warhammer.unitstore.DarkElvenUnitStore;
-import com.pilaf.warhammer.unitstore.DwarfsUnitStore;
-import com.pilaf.warhammer.unitstore.EmpireUnitStore;
-import com.pilaf.warhammer.unitstore.GreenskinsUnitStore;
+import com.pilaf.warhammer.unitstore.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +24,17 @@ public class Simulation {
     void simulation1() {
         List<Unit> listA = new ArrayList<>();
         List<Unit> listB = new ArrayList<>();
-        listA.addAll(DwarfsUnitStore.all());
+//        listA.add(EmpireUnitStore.test());
+//        listB.add(EmpireUnitStore.test());
+        listA.addAll(BretoniaUnitStore.all());
 //        listA.add(EmpireUnitStore.test());
 //        listB.add(EmpireUnitStore.test());
 //        listB.addAll(DarkElvenUnitStore.all());
-        listB.addAll(GreenskinsUnitStore.all());
+//        listB.add(DarkElvenUnitStore.Dreadspears());
+//        listB.add(DarkElvenUnitStore.ColdOneDreadKnights());
+        listB.addAll(WarriorsOfChaosUnitStore.all());
+//        listB.addAll(DwarfsUnitStore.all());
+//        listB.addAll(GreenskinsUnitStore.all());
         combatWithReport.init(
                listA,
                listB
@@ -40,6 +43,6 @@ public class Simulation {
 //                Collections.singletonList(EmpireUnitStore.),
 //                Collections.singletonList(EmpireUnitStore.test()));
         List<Report> reports = combatWithReport.report();
-        reports.stream().forEach(report -> System.out.println(report));
+        reports.stream().forEach(report -> System.out.println(report.printReport(false)));
     }
 }

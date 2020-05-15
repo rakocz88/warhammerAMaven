@@ -44,6 +44,8 @@ public class ChargeHelper {
            sum =  sum / CHARGE_BONUS_TIMEOUT;
         } else if (combatConfig.getChargeStatus() == ChargeStatus.STANDARD){
             sum = sum / (CHARGE_BONUS_TIMEOUT * 2);
+        } else if (combatConfig.getChargeStatus() == ChargeStatus.LOW){
+            sum = sum / (CHARGE_BONUS_TIMEOUT * 4);
         }
         return sum /100;
     }

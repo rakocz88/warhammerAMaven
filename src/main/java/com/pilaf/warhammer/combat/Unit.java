@@ -44,6 +44,7 @@ public class Unit {
     private int apMissileDamage;
     private int accuracy;
     private int missileAmount;
+    private int missileResistance;
 
 
 

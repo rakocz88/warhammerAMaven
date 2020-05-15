@@ -1,7 +1,6 @@
 package com.pilaf.warhammer.combat;
 
 import com.pilaf.warhammer.combat.skills.SkillsModifierHelper;
-import com.pilaf.warhammer.combat.skills.Target;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -22,7 +21,6 @@ public class UnitService {
         } else if (attackChance < 0.1) {
             attackChance = 0.1;
         }
-        log.info("Chance to {} hit {} is {}", unit.getName(), target.getName(), attackChance);
         return attackChance;
     }
 
@@ -61,7 +59,6 @@ public class UnitService {
                     * calculateResistanceModifier(target.getPhysicalResistance())
                     * calculateArmorReduction(target.getArmor(), unit, target);
         }
-        log.info("Average Damage {} on {} is {}", unit.getName(), target.getName(), apDamageComputed + standardDamageComputed);
         return apDamageComputed + standardDamageComputed;
     }
 
@@ -77,12 +74,10 @@ public class UnitService {
         return ATTACK_BASE_INTERVAL / unit.getMeleeInterval();
     }
 
-    public double calculateUnitAmountSizeBonus(Unit unit, Unit target) {
-        if (unit.getUnitAmount() < target.getUnitAmount()) {
-            return 1;
-        } else {
-            return 1 + ((unit.getUnitAmount() / target.getUnitAmount()) / 4);
-        }
+
+
+    private boolean isBeetween(int unitAmount, int i, int i1) {
+        return i <= unitAmount && unitAmount < i1;
     }
 
 
