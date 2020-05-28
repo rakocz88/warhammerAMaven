@@ -27,7 +27,7 @@ public class EfficiencyService {
         report.setAttackEfficiency(toAttackEfficiency(unit2DefenceEfficiency));
         report.setDefenceEfficiency(toDefenceEfficiency(unit1DefenceEfficiency));
         report.setOverallScore(overallUnit1Efficiency);
-        report.setEfficiencyGold(calculateEfficiencyGold(overallUnit1Efficiency, unit1.getCost(), unit2.getCost()));
+        report.setEfficiencyGold(calculateEfficiencyGold(unit1DefenceEfficiency, unit2DefenceEfficiency, unit1.getCost(), unit2.getCost()));
         return report;
     }
 
@@ -39,9 +39,10 @@ public class EfficiencyService {
         return BigDecimal.valueOf(EFFICIENCY_STANDARD).divide(unit2DefenceEfficiency, 2, RoundingMode.HALF_UP);
     }
 
-    private BigDecimal calculateEfficiencyGold(BigDecimal overallEfficiency, int cost, int unit2Cost) {
-        BigDecimal multiplied = overallEfficiency.multiply(new BigDecimal(unit2Cost));
-        return multiplied.divide(new BigDecimal(cost), 2, RoundingMode.HALF_UP);
+    private BigDecimal calculateEfficiencyGold(BigDecimal unit1DefenceEfficiency, BigDecimal unit2DefenceEfficiency, int cost, int unit2Cost) {
+        BigDecimal unit1ResultPerGold = unit1DefenceEfficiency.divide(new BigDecimal(cost), 2, RoundingMode.HALF_UP);
+        BigDecimal unit2ResultPerGold = unit2DefenceEfficiency.divide(new BigDecimal(unit2Cost), 2, RoundingMode.HALF_UP);
+        return unit1ResultPerGold.divide(unit2ResultPerGold, 2, RoundingMode.HALF_UP);
     }
 
     public BigDecimal calculateHitsToWin(Unit unit, Unit target, Report report) {

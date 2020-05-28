@@ -45,6 +45,9 @@ public class Unit {
     private int accuracy;
     private int missileAmount;
     private int missileResistance;
+    private boolean splashAttack;
+    private int maxSplashUnitAmount;
+    private SplashTargetSize splashTargetSize;
 
 
 

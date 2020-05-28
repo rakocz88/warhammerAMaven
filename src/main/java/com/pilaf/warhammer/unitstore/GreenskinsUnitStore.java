@@ -1,9 +1,6 @@
 package com.pilaf.warhammer.unitstore;
 
-import com.pilaf.warhammer.combat.Race;
-import com.pilaf.warhammer.combat.Size;
-import com.pilaf.warhammer.combat.Skills;
-import com.pilaf.warhammer.combat.Unit;
+import com.pilaf.warhammer.combat.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,8 +11,8 @@ public class GreenskinsUnitStore {
         return Arrays.asList(
                 Goblins(), NightGoblins(), NightGoblinsFanatics(), OrcBoyz(), NastySkulkers(), SavageOrcs(), OrcBigUns(), SavageOrcBigUns(),
                 BlackOrcs(), GoblinWolfRiders(), ForestGoblinSpiderRiders(), Trolls(), OrcBoarBoyz(), SavageOrcBoarBoyz(),
-                OrcBoarBoyBigUns(), SavageOrcBoarBoyBigUns(),
-                SquigHerd(), NightGoblinSquigHoppers()
+                OrcBoarBoyBigUns(), SavageOrcBoarBoyBigUns(), RiverTrolls(), StoneTrolls(),
+                SquigHerd(), NightGoblinSquigHoppers(), SpiderHatchlings()
         );
     }
 
@@ -223,13 +220,66 @@ public class GreenskinsUnitStore {
                 .leadership(40)
                 .speed(54)
                 .attack(34)
+                .splashAttack(true)
+                .maxSplashUnitAmount(4)
+                .splashTargetSize(SplashTargetSize.MEDIUM)
                 .defence(32)
                 .chargeBonus(24)
                 .damage(30)
                 .apDamage(70)
                 .meleeInterval(3.8)
-                .armor(30)
+                .armor(40)
                 .skillsList(Arrays.asList(Skills.REGENERATION))
+                .build();
+    }
+
+    public static Unit RiverTrolls(){
+        return  Unit.builder()
+                .name("RiverTrolls")
+                .race(Race.GREENSKINS)
+                .size(Size.LARGE)
+                .unitAmount(12)
+                .cost(900)
+                .hitPointsPerUnit(494)
+                .leadership(40)
+                .speed(54)
+                .attack(30)
+                .meleeInterval(3.8)
+                .splashAttack(true)
+                .maxSplashUnitAmount(4)
+                .splashTargetSize(SplashTargetSize.MEDIUM)
+                .defence(40)
+                .chargeBonus(24)
+                .damage(30)
+                .apDamage(50)
+                .armor(40)
+                .skillsList(Arrays.asList(Skills.REGENERATION, Skills.OVERWHELMING_ODOUR))
+                .build();
+    }
+
+    public static Unit StoneTrolls(){
+        return  Unit.builder()
+                .name("StoneTrolls")
+                .race(Race.GREENSKINS)
+                .size(Size.LARGE)
+                .unitAmount(12)
+                .cost(1100)
+                .hitPointsPerUnit(494)
+                .leadership(40)
+                .speed(54)
+                .attack(36)
+                .meleeInterval(4)
+                .splashAttack(true)
+                .maxSplashUnitAmount(4)
+                .splashTargetSize(SplashTargetSize.MEDIUM)
+                .defence(32)
+                .chargeBonus(34)
+                .damage(39)
+                .apDamage(81)
+                .armor(40)
+                .magicalResistance(25)
+                .missileResistance(30)
+                .skillsList(Arrays.asList(Skills.REGENERATION, Skills.OVERWHELMING_ODOUR))
                 .build();
     }
 
@@ -403,6 +453,27 @@ public class GreenskinsUnitStore {
                 .meleeInterval(3.8)
                 .armor(50)
                 .skillsList(Arrays.asList(Skills.RAMPAGE, Skills.CRAZY_SQUIQ))
+                .build();
+    }
+
+    public static Unit SpiderHatchlings(){
+        return  Unit.builder()
+                .name("SpiderHatchlings")
+                .race(Race.GREENSKINS)
+                .size(Size.INFANTRY)
+                .unitAmount(45)
+                .cost(150)
+                .hitPointsPerUnit(73)
+                .armor(45)
+                .leadership(50)
+                .speed(76)
+                .attack(22)
+                .meleeInterval(4.3)
+                .defence(20)
+                .damage(18)
+                .apDamage(5)
+                .chargeBonus(19)
+                .skillsList(Arrays.asList(Skills.POISON_ATTACK))
                 .build();
     }
 }

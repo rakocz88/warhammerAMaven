@@ -289,6 +289,7 @@ public class BretoniaUnitStore {
                 .chargeBonus(78)
                 .damage(23)
                 .apDamage(15)
+                .bonusAgainstLarge(12)
                 .meleeInterval(5.1)
                 .physicalResistance(20)
                 .armor(90)
