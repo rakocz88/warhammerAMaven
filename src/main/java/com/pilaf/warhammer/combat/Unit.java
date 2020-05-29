@@ -48,6 +48,7 @@ public class Unit {
     private boolean splashAttack;
     private int maxSplashUnitAmount;
     private SplashTargetSize splashTargetSize;
+    private int tier;
 
 
 
