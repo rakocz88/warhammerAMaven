@@ -83,7 +83,7 @@ public class UnitService {
 
     private int calculateBonus(Unit unit, Size size) {
         int bonus = 0;
-        if (size.equals(Size.INFANTRY)) {
+        if (size.equals(Size.SMALL)) {
             bonus += unit.getBonusAgainstInfantry();
         }
         if (size.equals(Size.LARGE)) {
@@ -94,7 +94,7 @@ public class UnitService {
 
     private double calculateBonusDamage(Unit unit, Size size, double damage) {
         double bonus = 0;
-        if (size.equals(Size.INFANTRY)) {
+        if (size.equals(Size.SMALL)) {
             bonus += (unit.getBonusAgainstInfantry() * (damage / (unit.getDamage() + unit.getApDamage())));
         }
         if (size.equals(Size.LARGE)) {

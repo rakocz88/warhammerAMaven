@@ -57,7 +57,7 @@ public class ChargeHelperTest {
     @Test
     void chargeAbsorbTest1(){
         when(combatConfig.getChargeStatus()).thenReturn(ChargeStatus.CYCLE);
-        Unit unit1 = Unit.builder().size(Size.INFANTRY).damage(100).apDamage(100).chargeBonus(60).attack(100).skillsList(new ArrayList<>()).build();
+        Unit unit1 = Unit.builder().size(Size.SMALL).damage(100).apDamage(100).chargeBonus(60).attack(100).skillsList(new ArrayList<>()).build();
         Unit unit2 = Unit.builder().skillsList(Collections.singletonList(Skills.CHARGE_DEFENCE_EXPERT)).build();
         double result = Math.round(chargeHelper.calculateBonusDamage(100, unit1, unit2));
         assertThat(result).isEqualTo(0);
@@ -69,7 +69,7 @@ public class ChargeHelperTest {
     @Test
     void chargeAbsorbTest2(){
         when(combatConfig.getChargeStatus()).thenReturn(ChargeStatus.CYCLE);
-        Unit unit1 = Unit.builder().size(Size.INFANTRY).damage(100).apDamage(100).chargeBonus(60).attack(100)
+        Unit unit1 = Unit.builder().size(Size.SMALL).damage(100).apDamage(100).chargeBonus(60).attack(100)
                 .skillsList(Collections.singletonList(Skills.CHARGE_DEFENCE_EXPERT)).build();
         Unit unit2 = Unit.builder().skillsList(Collections.emptyList()).build();
         double result = Math.round(chargeHelper.calculateBonusDamage(100, unit1, unit2));
@@ -93,7 +93,7 @@ public class ChargeHelperTest {
     @Test
     void chargeAbsorbTest4(){
         when(combatConfig.getChargeStatus()).thenReturn(ChargeStatus.CYCLE);
-        Unit unit1 = Unit.builder().size(Size.INFANTRY).damage(100).apDamage(100).chargeBonus(60).attack(100)
+        Unit unit1 = Unit.builder().size(Size.SMALL).damage(100).apDamage(100).chargeBonus(60).attack(100)
                 .skillsList(Collections.emptyList()).build();
         Unit unit2 = Unit.builder().skillsList(Collections.singletonList(Skills.CHARGE_DEFENCE_AGAINST_LARGE)).build();
         double result = Math.round(chargeHelper.calculateBonusDamage(100, unit1, unit2));
