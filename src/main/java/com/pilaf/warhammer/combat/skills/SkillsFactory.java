@@ -23,6 +23,10 @@ public class SkillsFactory {
             return new CauseFear();
         } if (skills == Skills.CAUSE_TERROR){
             return new CauseTerror();
+        } if (skills == Skills.MARTIAL_PROWES){
+            return new MartialProwess();
+        } if (skills == Skills.MARTIAL_MASTERY){
+            return new MartialMastery();
         }
         return null;
     }

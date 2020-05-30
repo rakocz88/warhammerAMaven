@@ -223,4 +223,33 @@ public class SkillsModifierHelperTest {
         assertThat(leadership).isEqualTo(87);
     }
 
+    @Test
+    void shouldMartialProwessIncreaseAttackAndDefence(){
+        Unit unit1 = Unit.builder().skillsList(
+                Arrays.asList(Skills.MARTIAL_PROWES)
+        ).attack(100).damage(100).apDamage(100).hitPointsPerUnit(100).unitAmount(10).defence(100).speed(100).build();
+        Unit unit2 = Unit.builder().skillsList(
+                Arrays.asList()
+        ).attack(100).damage(100).apDamage(100).hitPointsPerUnit(100).unitAmount(10).defence(100).speed(100).build();
+        int attack = (int) Math.round(skillsModifierHelper.calculateAttackAfterEffect(100, unit1, unit2));
+        int defence = (int) Math.round(skillsModifierHelper.calculateDefenceAfterEffect(100, unit1, unit2));
+        assertThat(attack).isEqualTo(101);
+        assertThat(defence).isEqualTo(106);
+    }
+
+
+    @Test
+    void shouldMartialMasteryIncreaseAttackAndDefence(){
+        Unit unit1 = Unit.builder().skillsList(
+                Arrays.asList(Skills.MARTIAL_MASTERY)
+        ).attack(100).damage(100).apDamage(100).hitPointsPerUnit(100).unitAmount(10).defence(100).speed(100).build();
+        Unit unit2 = Unit.builder().skillsList(
+                Arrays.asList()
+        ).attack(100).damage(100).apDamage(100).hitPointsPerUnit(100).unitAmount(10).defence(100).speed(100).build();
+        int attack = (int) Math.round(skillsModifierHelper.calculateAttackAfterEffect(100, unit1, unit2));
+        int defence = (int) Math.round(skillsModifierHelper.calculateDefenceAfterEffect(100, unit1, unit2));
+        assertThat(attack).isEqualTo(104);
+        assertThat(defence).isEqualTo(106);
+    }
+
 }
