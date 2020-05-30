@@ -1,6 +1,7 @@
 package com.pilaf.warhammer.combat.skills;
 
 import com.pilaf.warhammer.combat.Skills;
+import com.pilaf.warhammer.combat.Unit;
 
 public class Frenzy implements SkillsEffect {
     @Override
@@ -14,22 +15,28 @@ public class Frenzy implements SkillsEffect {
     }
 
     @Override
-    public double calculateAttackAfterEffect(double attack) {
-        return attack + 8;
+    public double calculateAttackAfterEffect(Unit unit, Unit target, double attack) {
+        return SkillsHelper.calculateBonusDependingOnDisciplineAdd(unit, attack, 8);
     }
 
-    @Override
-    public double calculateDamageAfterEffect(double damage) {
-        return damage * 1.15;
-    }
+
 
     @Override
-    public double calculateChargeAfterEffect(double charge) {
-        return charge * 1.08;
+    public double calculateDamageAfterEffect(Unit unit, Unit target, double damage) {
+        return SkillsHelper.calculateBonusDependingOnDisciplineMultiply(unit, damage, 1.15);
+    }
+
+
+
+    @Override
+    public double calculateChargeAfterEffect(Unit unit, Unit target, double charge) {
+        return SkillsHelper.calculateBonusDependingOnDisciplineMultiply(unit, charge, 1.08);
     }
 
     @Override
     public boolean isConnectedToLeadership() {
         return true;
     }
+
+
 }

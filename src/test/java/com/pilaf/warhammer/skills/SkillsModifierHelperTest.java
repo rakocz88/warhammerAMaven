@@ -27,7 +27,7 @@ public class SkillsModifierHelperTest {
                 Arrays.asList()
         ).attack(100).damage(100).apDamage(100).hitPointsPerUnit(100).unitAmount(10).defence(100).speed(100).build();
         int attackEffect = (int) Math.round(skillsModifierHelper.calculateAttackAfterEffect(100, unit1, unit2));
-        assertThat(attackEffect).isEqualTo(108);
+        assertThat(attackEffect).isEqualTo(104);
     }
 
 
@@ -35,6 +35,18 @@ public class SkillsModifierHelperTest {
     void shouldFrenzyIncreaseDamage(){
         Unit unit1 = Unit.builder().skillsList(
                 Arrays.asList(Skills.FRENZY)
+        ).attack(100).damage(100).apDamage(100).hitPointsPerUnit(100).unitAmount(10).defence(100).speed(100).build();
+        Unit unit2 = Unit.builder().skillsList(
+                Arrays.asList()
+        ).attack(100).damage(100).apDamage(100).hitPointsPerUnit(100).unitAmount(10).defence(100).speed(100).build();
+        int damageEffect = (int) Math.round(skillsModifierHelper.calculateDamageAfterEffect(100, unit1, unit2));
+        assertThat(damageEffect).isEqualTo(108);
+    }
+
+    @Test
+    void shouldFrenzyWorkBetterOnUnbreakableUnit(){
+        Unit unit1 = Unit.builder().skillsList(
+                Arrays.asList(Skills.FRENZY, Skills.UNBREAKABLE)
         ).attack(100).damage(100).apDamage(100).hitPointsPerUnit(100).unitAmount(10).defence(100).speed(100).build();
         Unit unit2 = Unit.builder().skillsList(
                 Arrays.asList()
@@ -52,7 +64,7 @@ public class SkillsModifierHelperTest {
                 Arrays.asList()
         ).attack(100).damage(100).apDamage(100).hitPointsPerUnit(100).unitAmount(10).defence(100).speed(100).build();
         int chargeEffect = (int) Math.round(skillsModifierHelper.calculateChargeAfterEffect(100, unit1, unit2));
-        assertThat(chargeEffect).isEqualTo(108);
+        assertThat(chargeEffect).isEqualTo(104);
     }
 
     @Test
@@ -88,7 +100,7 @@ public class SkillsModifierHelperTest {
                 Arrays.asList(Skills.POISON_ATTACK)
         ).attack(100).damage(100).apDamage(100).hitPointsPerUnit(100).unitAmount(10).defence(100).speed(100).build();
         int damage = (int) Math.round(skillsModifierHelper.calculateDamageAfterEffect(100, unit1, unit2));
-        assertThat(damage).isEqualTo(92);
+        assertThat(damage).isEqualTo(86);
     }
 
 }

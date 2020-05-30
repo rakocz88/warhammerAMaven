@@ -16,29 +16,15 @@ public class PoisonAttack implements SkillsEffect {
         return Target.ENEMY;
     }
 
-    @Override
-    public double calculateAttackAfterEffect(double attack) {
-        return attack;
-    }
 
     @Override
-    public double calculateDefenceAfterEffect(double defence) {
-        return defence;
-    }
-
-    @Override
-    public double calculateDamageAfterEffect(double damage) {
+    public double calculateDamageAfterEffect(Unit unit, Unit target, double damage) {
         return damage * 0.8;
     }
 
     @Override
-    public double calculateSpeedAfterEffect(double speed) {
+    public double calculateSpeedAfterEffect(Unit unit, Unit target, double speed) {
         return speed * 0.8;
-    }
-
-    @Override
-    public double calculateArmorAfterEffect(double armor) {
-        return armor;
     }
 
 

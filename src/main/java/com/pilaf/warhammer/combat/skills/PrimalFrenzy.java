@@ -15,17 +15,17 @@ public class PrimalFrenzy implements SkillsEffect {
     }
 
     @Override
-    public double calculateAttackAfterEffect(double attack) {
+    public double calculateAttackAfterEffect(Unit unit, Unit target, double attack) {
         return attack + 5;
     }
 
     @Override
-    public double calculateSpeedAfterEffect(double speed) {
+    public double calculateSpeedAfterEffect(Unit unit, Unit target, double speed) {
         return speed * 1.12;
     }
 
     @Override
-    public double calculateChargeAfterEffect(double charge) {
+    public double calculateChargeAfterEffect(Unit unit, Unit target, double charge) {
         return charge + 1.08;
     }
 

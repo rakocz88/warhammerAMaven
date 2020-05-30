@@ -19,63 +19,63 @@ public class SkillsModifierHelper {
     // attack
     public double calculateAttackAfterEffect(double stat, Unit unit, Unit target) {
         double calculatedStat = stat;
-        calculatedStat = applyEffects(calculatedStat, unit, "calculateAttackAfterEffect", Target.UNIT);
-        calculatedStat = applyEffects(calculatedStat, target,  "calculateAttackAfterEffect", Target.ENEMY);
+        calculatedStat = applyEffects(calculatedStat, unit, target, "calculateAttackAfterEffect", Target.UNIT);
+        calculatedStat = applyEffects(calculatedStat, target, unit, "calculateAttackAfterEffect", Target.ENEMY);
         return calculatedStat;
     }
 
     // defence
     public double calculateDamageAfterEffect(double stat, Unit unit, Unit target) {
         double calculatedStat = stat;
-        calculatedStat = applyEffects(calculatedStat, unit, "calculateDamageAfterEffect", Target.UNIT);
-        calculatedStat = applyEffects(calculatedStat, target,  "calculateDamageAfterEffect", Target.ENEMY);
+        calculatedStat = applyEffects(calculatedStat, unit, target,"calculateDamageAfterEffect", Target.UNIT);
+        calculatedStat = applyEffects(calculatedStat, target, unit, "calculateDamageAfterEffect", Target.ENEMY);
         return calculatedStat;
     }
 
     // defence
     public double calculateDefenceAfterEffect(double stat, Unit unit, Unit target) {
         double calculatedStat = stat;
-        calculatedStat = applyEffects(calculatedStat, unit, "calculateDefenceAfterEffect", Target.UNIT);
-        calculatedStat = applyEffects(calculatedStat, target,  "calculateDefenceAfterEffect", Target.ENEMY);
+        calculatedStat = applyEffects(calculatedStat, unit, target, "calculateDefenceAfterEffect", Target.UNIT);
+        calculatedStat = applyEffects(calculatedStat, target, unit,  "calculateDefenceAfterEffect", Target.ENEMY);
         return calculatedStat;
     }
 
     // charge
     public double calculateChargeAfterEffect(double stat, Unit unit, Unit target) {
         double calculatedStat = stat;
-        calculatedStat = applyEffects(calculatedStat, unit, "calculateChargeAfterEffect", Target.UNIT);
-        calculatedStat = applyEffects(calculatedStat, target,  "calculateChargeAfterEffect", Target.ENEMY);
+        calculatedStat = applyEffects(calculatedStat, unit, target ,"calculateChargeAfterEffect", Target.UNIT);
+        calculatedStat = applyEffects(calculatedStat, target, unit,"calculateChargeAfterEffect", Target.ENEMY);
         return calculatedStat;
     }
 
     // charge
     public double calculateSpeedAfterEffect(double stat, Unit unit, Unit target) {
         double calculatedStat = stat;
-        calculatedStat = applyEffects(calculatedStat, unit, "calculateSpeedAfterEffect", Target.UNIT);
-        calculatedStat = applyEffects(calculatedStat, target,  "calculateSpeedAfterEffect", Target.ENEMY);
+        calculatedStat = applyEffects(calculatedStat, unit, target ,"calculateSpeedAfterEffect", Target.UNIT);
+        calculatedStat = applyEffects(calculatedStat, target, unit, "calculateSpeedAfterEffect", Target.ENEMY);
         return calculatedStat;
     }
 
     // charge
     public double calculateArmorAfterEffect(double stat, Unit unit, Unit target) {
         double calculatedStat = stat;
-        calculatedStat = applyEffects(calculatedStat, unit, "calculateArmorAfterEffect", Target.UNIT);
-        calculatedStat = applyEffects(calculatedStat, target,  "calculateArmorAfterEffect", Target.ENEMY);
+        calculatedStat = applyEffects(calculatedStat, unit, target, "calculateArmorAfterEffect", Target.UNIT);
+        calculatedStat = applyEffects(calculatedStat, target, unit, "calculateArmorAfterEffect", Target.ENEMY);
         return calculatedStat;
     }
 
-    private double applyEffects(double stat, Unit unit, String methodToInvoke, Target target) {
-        List<SkillsEffect> skillsEffectsList =  unit.getSkillsList().stream()
+    private double applyEffects(double stat, Unit unit, Unit target, String methodToInvoke, Target targetEnum) {
+        List<SkillsEffect> skillsEffectsList = unit.getSkillsList().stream()
                 .map(skills -> skillsFactory.create(skills))
                 .filter(skills -> skills != null)
-                .filter(skillsEffect -> skillsEffect.getTarget() == target)
+                .filter(skillsEffect -> skillsEffect.getTarget() == targetEnum)
                 .collect(Collectors.toList());
         double calculatedStat = stat;
-        for (SkillsEffect skillEffect: skillsEffectsList){
-            Method foundMethod=  Arrays.asList(ReflectionUtils.getAllDeclaredMethods(SkillsEffect.class)).stream().filter(
+        for (SkillsEffect skillEffect : skillsEffectsList) {
+            Method foundMethod = Arrays.asList(ReflectionUtils.getAllDeclaredMethods(SkillsEffect.class)).stream().filter(
                     method -> method.getName().equals(methodToInvoke)
             ).findFirst().orElseThrow();
-            calculatedStat = (double )ReflectionUtils.invokeMethod(foundMethod, skillEffect, stat);
+            calculatedStat = (double) ReflectionUtils.invokeMethod(foundMethod, skillEffect, unit, target, stat);
         }
         return calculatedStat;
     }

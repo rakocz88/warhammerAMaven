@@ -14,11 +14,13 @@ public class MadnessOfKhaine implements SkillsEffect {
         return Target.ENEMY;
     }
 
-    public double calculateSpeedAfterEffect(double speed){
+    @Override
+    public double calculateSpeedAfterEffect(Unit unit, Unit target, double speed){
         return speed * 0.8;
     }
 
-    public double calculateDefenceAfterEffect(double defence){
+    @Override
+    public double calculateDefenceAfterEffect(Unit unit, Unit target, double defence){
 
         return defence * 0.9;
     }

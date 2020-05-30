@@ -7,22 +7,22 @@ public interface SkillsEffect {
 
     Skills getSkillName();
     Target getTarget();
-    default  double calculateAttackAfterEffect(double attack){
+    default  double calculateAttackAfterEffect(Unit unit, Unit target, double attack){
         return attack;
     }
-    default double calculateDefenceAfterEffect(double defence){
+    default double calculateDefenceAfterEffect(Unit unit, Unit target, double defence){
         return defence;
     }
-    default double calculateDamageAfterEffect(double damage){
+    default double calculateDamageAfterEffect(Unit unit, Unit target, double damage){
         return damage;
     }
-    default double calculateSpeedAfterEffect(double speed){
+    default double calculateSpeedAfterEffect(Unit unit, Unit target, double speed){
         return speed;
     }
-    default double calculateArmorAfterEffect(double armor){
+    default double calculateArmorAfterEffect(Unit unit, Unit target, double armor){
         return armor;
     }
-    default double calculateChargeAfterEffect(double charge){
+    default double calculateChargeAfterEffect(Unit unit, Unit target, double charge){
         return charge;
     }
     default boolean isConnectedToLeadership(){
