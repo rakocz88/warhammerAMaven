@@ -12,9 +12,17 @@ public class SkillsFactory {
         } if (skills == Skills.POISON_ATTACK){
             return new PoisonAttack();
         } if (skills == Skills.PRIMAL_FRENZY){
-            return new PrimalFrenzy();
+            return new PrimalFury();
         } if (skills == Skills.MADNESS_OF_KHAINE){
             return new MadnessOfKhaine();
+        } if (skills == Skills.ROWDY){
+            return new Rowdy();
+        } if (skills == Skills.BLOODGREED){
+            return new Bloodgreed();
+        } if (skills == Skills.CAUSE_FEAR){
+            return new CauseFear();
+        } if (skills == Skills.CAUSE_TERROR){
+            return new CauseTerror();
         }
         return null;
     }

@@ -56,11 +56,19 @@ public class SkillsModifierHelper {
         return calculatedStat;
     }
 
-    // charge
+    // armor
     public double calculateArmorAfterEffect(double stat, Unit unit, Unit target) {
         double calculatedStat = stat;
         calculatedStat = applyEffects(calculatedStat, unit, target, "calculateArmorAfterEffect", Target.UNIT);
         calculatedStat = applyEffects(calculatedStat, target, unit, "calculateArmorAfterEffect", Target.ENEMY);
+        return calculatedStat;
+    }
+
+    // leadership
+    public double calculateLeadershipAfterEffect(double stat, Unit unit, Unit target) {
+        double calculatedStat = stat;
+        calculatedStat = applyEffects(calculatedStat, unit, target, "calculateLeadershipAfterEffect", Target.UNIT);
+        calculatedStat = applyEffects(calculatedStat, target, unit, "calculateLeadershipAfterEffect", Target.ENEMY);
         return calculatedStat;
     }
 

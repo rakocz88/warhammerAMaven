@@ -25,6 +25,9 @@ public interface SkillsEffect {
     default double calculateChargeAfterEffect(Unit unit, Unit target, double charge){
         return charge;
     }
+    default double calculateLeadershipAfterEffect(Unit unit, Unit target, double leadership){
+        return leadership;
+    }
     default boolean isConnectedToLeadership(){
         return false;
     }

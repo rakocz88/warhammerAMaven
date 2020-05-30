@@ -46,7 +46,7 @@ public class EfficiencyService {
     }
 
     public BigDecimal calculateHitsToWin(Unit unit, Unit target, Report report) {
-        BigDecimal hitPointsToWin = BigDecimal.valueOf(disciplineHelper.calculateDamageToHitToLoseDiscipline(target));
+        BigDecimal hitPointsToWin = BigDecimal.valueOf(disciplineHelper.calculateDamageToHitToLoseDiscipline(unit, target));
         BigDecimal attackChance = BigDecimal.valueOf(unitService.calculateAttackChance(unit, target)).setScale(2, RoundingMode.HALF_UP);
         BigDecimal averageDamage = BigDecimal.valueOf(unitService.calculateAverageDamage(unit, target)).setScale(2, RoundingMode.HALF_UP);
         BigDecimal speedMod = BigDecimal.valueOf(unitService.calculateSpeedModifier(unit)).setScale(2, RoundingMode.HALF_UP);

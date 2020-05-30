@@ -103,4 +103,124 @@ public class SkillsModifierHelperTest {
         assertThat(damage).isEqualTo(86);
     }
 
+    @Test
+    void shouldRowdyIncreaseUnitLeadership(){
+        Unit unit1 = Unit.builder().skillsList(
+                Arrays.asList(Skills.ROWDY)
+        ).attack(100).damage(100).apDamage(100).hitPointsPerUnit(100).unitAmount(10).defence(100).speed(100).build();
+        Unit unit2 = Unit.builder().skillsList(
+                Arrays.asList()
+        ).attack(100).damage(100).apDamage(100).hitPointsPerUnit(100).unitAmount(10).defence(100).speed(100).build();
+        int leadership = (int) Math.round(skillsModifierHelper.calculateLeadershipAfterEffect(100, unit1, unit2));
+        assertThat(leadership).isEqualTo(104);
+    }
+
+    @Test
+    void shouldBloodgreedIncreaseUnitLeadership(){
+        Unit unit1 = Unit.builder().skillsList(
+                Arrays.asList(Skills.BLOODGREED)
+        ).attack(100).damage(100).apDamage(100).hitPointsPerUnit(100).unitAmount(10).defence(100).speed(100).build();
+        Unit unit2 = Unit.builder().skillsList(
+                Arrays.asList()
+        ).attack(100).damage(100).apDamage(100).hitPointsPerUnit(100).unitAmount(10).defence(100).speed(100).build();
+        int leadership = (int) Math.round(skillsModifierHelper.calculateLeadershipAfterEffect(100, unit1, unit2));
+        assertThat(leadership).isEqualTo(115);
+    }
+
+    @Test
+    void shouldCauseFearDecreaseEnemyLeadership(){
+        Unit unit1 = Unit.builder().skillsList(
+                Arrays.asList(Skills.CAUSE_FEAR)
+        ).attack(100).damage(100).apDamage(100).hitPointsPerUnit(100).unitAmount(10).defence(100).speed(100).build();
+        Unit unit2 = Unit.builder().skillsList(
+                Arrays.asList()
+        ).attack(100).damage(100).apDamage(100).hitPointsPerUnit(100).unitAmount(10).defence(100).speed(100).build();
+        int leadership = (int) Math.round(skillsModifierHelper.calculateLeadershipAfterEffect(100, unit2, unit1));
+        assertThat(leadership).isEqualTo(92);
+    }
+
+    @Test
+    void shouldCauseFearNotWorkOnImmuneToPsychology(){
+        Unit unit1 = Unit.builder().skillsList(
+                Arrays.asList(Skills.CAUSE_FEAR)
+        ).attack(100).damage(100).apDamage(100).hitPointsPerUnit(100).unitAmount(10).defence(100).speed(100).build();
+        Unit unit2 = Unit.builder().skillsList(
+                Arrays.asList(Skills.IMMUNE_TO_PSYCHOLOGY)
+        ).attack(100).damage(100).apDamage(100).hitPointsPerUnit(100).unitAmount(10).defence(100).speed(100).build();
+        int leadership = (int) Math.round(skillsModifierHelper.calculateLeadershipAfterEffect(100, unit2, unit1));
+        assertThat(leadership).isEqualTo(100);
+    }
+
+    @Test
+    void shouldCauseFearNotWorkOnCauseFear(){
+        Unit unit1 = Unit.builder().skillsList(
+                Arrays.asList(Skills.CAUSE_FEAR)
+        ).attack(100).damage(100).apDamage(100).hitPointsPerUnit(100).unitAmount(10).defence(100).speed(100).build();
+        Unit unit2 = Unit.builder().skillsList(
+                Arrays.asList(Skills.CAUSE_FEAR)
+        ).attack(100).damage(100).apDamage(100).hitPointsPerUnit(100).unitAmount(10).defence(100).speed(100).build();
+        int leadership = (int) Math.round(skillsModifierHelper.calculateLeadershipAfterEffect(100, unit2, unit1));
+        assertThat(leadership).isEqualTo(100);
+    }
+
+    @Test
+    void shouldCauseFearNotWorkOnCauseTerror(){
+        Unit unit1 = Unit.builder().skillsList(
+                Arrays.asList(Skills.CAUSE_FEAR)
+        ).attack(100).damage(100).apDamage(100).hitPointsPerUnit(100).unitAmount(10).defence(100).speed(100).build();
+        Unit unit2 = Unit.builder().skillsList(
+                Arrays.asList(Skills.CAUSE_TERROR)
+        ).attack(100).damage(100).apDamage(100).hitPointsPerUnit(100).unitAmount(10).defence(100).speed(100).build();
+        int leadership = (int) Math.round(skillsModifierHelper.calculateLeadershipAfterEffect(100, unit2, unit1));
+        assertThat(leadership).isEqualTo(100);
+    }
+
+    @Test
+    void shouldCauseTerrorDecreaseEnemyLeadership(){
+        Unit unit1 = Unit.builder().skillsList(
+                Arrays.asList(Skills.CAUSE_TERROR)
+        ).attack(100).damage(100).apDamage(100).hitPointsPerUnit(100).unitAmount(10).defence(100).speed(100).build();
+        Unit unit2 = Unit.builder().skillsList(
+                Arrays.asList()
+        ).attack(100).damage(100).apDamage(100).hitPointsPerUnit(100).unitAmount(10).defence(100).speed(100).build();
+        int leadership = (int) Math.round(skillsModifierHelper.calculateLeadershipAfterEffect(100, unit2, unit1));
+        assertThat(leadership).isEqualTo(87);
+    }
+
+    @Test
+    void shouldCauseTerrorNotWorkOnImmuneToPsychology(){
+        Unit unit1 = Unit.builder().skillsList(
+                Arrays.asList(Skills.CAUSE_TERROR)
+        ).attack(100).damage(100).apDamage(100).hitPointsPerUnit(100).unitAmount(10).defence(100).speed(100).build();
+        Unit unit2 = Unit.builder().skillsList(
+                Arrays.asList(Skills.IMMUNE_TO_PSYCHOLOGY)
+        ).attack(100).damage(100).apDamage(100).hitPointsPerUnit(100).unitAmount(10).defence(100).speed(100).build();
+        int leadership = (int) Math.round(skillsModifierHelper.calculateLeadershipAfterEffect(100, unit2, unit1));
+        assertThat(leadership).isEqualTo(100);
+    }
+
+    @Test
+    void shouldCauseTerrorNotWorkOnCauseTerror(){
+        Unit unit1 = Unit.builder().skillsList(
+                Arrays.asList(Skills.CAUSE_TERROR)
+        ).attack(100).damage(100).apDamage(100).hitPointsPerUnit(100).unitAmount(10).defence(100).speed(100).build();
+        Unit unit2 = Unit.builder().skillsList(
+                Arrays.asList(Skills.CAUSE_TERROR)
+        ).attack(100).damage(100).apDamage(100).hitPointsPerUnit(100).unitAmount(10).defence(100).speed(100).build();
+        int leadership = (int) Math.round(skillsModifierHelper.calculateLeadershipAfterEffect(100, unit2, unit1));
+        assertThat(leadership).isEqualTo(100);
+    }
+
+    @Test
+    void shouldCauseTerrorWorkOnCauseFear(){
+        Unit unit1 = Unit.builder().skillsList(
+                Arrays.asList(Skills.CAUSE_TERROR)
+        ).attack(100).damage(100).apDamage(100).hitPointsPerUnit(100).unitAmount(10).defence(100).speed(100).build();
+        Unit unit2 = Unit.builder().skillsList(
+                Arrays.asList(Skills.CAUSE_FEAR)
+        ).attack(100).damage(100).apDamage(100).hitPointsPerUnit(100).unitAmount(10).defence(100).speed(100).build();
+        int leadership = (int) Math.round(skillsModifierHelper.calculateLeadershipAfterEffect(100, unit2, unit1));
+        assertThat(leadership).isEqualTo(87);
+    }
+
 }

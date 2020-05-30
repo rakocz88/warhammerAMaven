@@ -1,18 +1,16 @@
 package com.pilaf.warhammer.combat;
 
+import com.pilaf.warhammer.combat.skills.SkillsModifierHelper;
 import lombok.RequiredArgsConstructor;
 import lombok.Value;
 import org.springframework.stereotype.Component;
-
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
 
 @Component
 @RequiredArgsConstructor
 public class DisciplineHelper {
 
     private final CombatConfig combatConfig;
+    private final SkillsModifierHelper skillsModifierHelper;
 
     public int calculateFightPenalty(double fightEfficiency) {
         if (fightEfficiency <= 0.5) {
@@ -24,13 +22,14 @@ public class DisciplineHelper {
         }
     }
 
-    public int calculateDamageToHitToLoseDiscipline(Unit unit) {
-        if (unit.getSkillsList().contains(Skills.UNBREAKABLE)){
-            return unit.getHitPointsPerUnit() * unit.getUnitAmount();
+    public int calculateDamageToHitToLoseDiscipline(Unit unit2, Unit target) {
+        double leadershipAfterEffects = skillsModifierHelper.calculateLeadershipAfterEffect(target.getLeadership(), target, unit2);
+        if (target.getSkillsList().contains(Skills.UNBREAKABLE)){
+            return target.getHitPointsPerUnit() * target.getUnitAmount();
         }
         int initialPenalty = sumUpInitialPenalty();
-        int disciplineLeft = unit.getLeadership() + initialPenalty;
-        return calculateDamageUnitUnitLosesAllLeadership(unit, disciplineLeft);
+        int disciplineLeft = (int)leadershipAfterEffects + initialPenalty;
+        return calculateDamageUnitUnitLosesAllLeadership(target, disciplineLeft);
     }
 
     private int calculateDamageUnitUnitLosesAllLeadership(Unit unit, int disciplineLeft) {
