@@ -105,7 +105,7 @@ public class UnitService {
 
 
     private double calculateArmorReduction(double armor, Unit unit, Unit target) {
-        double modifiedArmor = skillsModifierHelper.calculateArmorAfterEffect(armor, unit, target);
+        double modifiedArmor = skillsModifierHelper.calculateArmorAfterEffect(armor, target, unit );
         return 1 - (((modifiedArmor + (modifiedArmor / 2)) / 2) * 0.01);
     }
 

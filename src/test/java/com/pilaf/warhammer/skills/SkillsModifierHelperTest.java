@@ -278,4 +278,28 @@ public class SkillsModifierHelperTest {
         assertThat(attack).isEqualTo(91);
     }
 
+    @Test
+    void shouldSunderArmorDecreeaseArmor(){
+        Unit unit1 = Unit.builder().skillsList(
+                Arrays.asList(Skills.SUNDER_ARMOR)
+        ).attack(100).damage(100).apDamage(100).hitPointsPerUnit(100).unitAmount(10).defence(100).speed(100).build();
+        Unit unit2 = Unit.builder().skillsList(
+                Arrays.asList()
+        ).attack(100).damage(100).apDamage(100).armor(100).hitPointsPerUnit(100).unitAmount(10).defence(100).speed(100).build();
+        int attack = (int) Math.round(skillsModifierHelper.calculateArmorAfterEffect(100, unit2, unit1));
+        assertThat(attack).isEqualTo(70);
+    }
+
+    @Test
+    void shouldSunderArmorNotDecreaseArmorBellow0(){
+        Unit unit1 = Unit.builder().skillsList(
+                Arrays.asList(Skills.SUNDER_ARMOR)
+        ).attack(100).damage(100).apDamage(100).hitPointsPerUnit(100).unitAmount(10).defence(100).speed(100).build();
+        Unit unit2 = Unit.builder().skillsList(
+                Arrays.asList()
+        ).attack(100).damage(100).apDamage(100).armor(20).hitPointsPerUnit(100).unitAmount(10).defence(100).speed(100).build();
+        int attack = (int) Math.round(skillsModifierHelper.calculateArmorAfterEffect(20, unit2, unit1));
+        assertThat(attack).isEqualTo(0);
+    }
+
 }

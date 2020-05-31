@@ -83,7 +83,7 @@ public class SkillsModifierHelper {
             Method foundMethod = Arrays.asList(ReflectionUtils.getAllDeclaredMethods(SkillsEffect.class)).stream().filter(
                     method -> method.getName().equals(methodToInvoke)
             ).findFirst().orElseThrow();
-            calculatedStat = (double) ReflectionUtils.invokeMethod(foundMethod, skillEffect, unit, target, stat);
+            calculatedStat = (double) ReflectionUtils.invokeMethod(foundMethod, skillEffect, unit, target, calculatedStat);
         }
         return calculatedStat;
     }

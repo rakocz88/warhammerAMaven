@@ -31,6 +31,8 @@ public class SkillsFactory {
             return new StrenthInNumbers();
         } if (skills == Skills.CHARMED){
             return new Charmed();
+        } if (skills == Skills.SUNDER_ARMOR){
+            return new SunderedArmor();
         }
         return null;
     }
