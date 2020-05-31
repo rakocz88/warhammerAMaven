@@ -41,7 +41,7 @@ public class BeastmanUnitStore {
 
     public static Unit UngorHerd() {
         return Unit.builder()
-                .name("UngorSpearmenHerd")
+                .name("UngorHerd")
                 .race(Race.BEASTMAN)
                 .size(Size.SMALL)
                 .tier(3)

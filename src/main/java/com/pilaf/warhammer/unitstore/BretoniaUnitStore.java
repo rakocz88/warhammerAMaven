@@ -77,7 +77,7 @@ public class BretoniaUnitStore {
                 .damage(20)
                 .apDamage(6)
                 .meleeInterval(4.3)
-                .armor(300)
+                .armor(30)
                 .skillsList(Arrays.asList(Skills.SILVER_SHIELD))
                 .build();
     }
