@@ -9,7 +9,7 @@ public class WoodElfsUnitStore {
 
     public static List<Unit> all() {
         return Arrays.asList(
-
+            EternalGuard(), Dryads(), EternalGuardShields(), Wardancers(), WardancersAsraiSpears(), WildwoodRangers(), WildRiders(), WildRidersShields(), TreeKin()
         );
     }
 

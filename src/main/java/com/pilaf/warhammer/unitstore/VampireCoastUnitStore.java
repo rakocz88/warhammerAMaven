@@ -9,7 +9,8 @@ public class VampireCoastUnitStore {
 
     public static List<Unit> all() {
         return Arrays.asList(
-
+            ZombiePirateDeckhandsMob(), ZombiePirateDeckhandsMobPolearms(), Syreens(), DepthGuard(), DepthGuardPolearms(), FellBats(), AnimatedHulks(),
+                ScurvyDogs(), RottingPrometheans(), Mournguls()
         );
     }
 

@@ -13,7 +13,8 @@ public class BretoniaUnitStore {
     public static List<Unit> all() {
         return Arrays.asList(
                 PeasantMob(), MenAtArms(), MenAtArmsShields(), SpearmenAtArms(), SpearmenAtArmsShields(), MenAtArmsPolearm(),
-                BattlePilgrims(), FootSquires(), MountedYeomen(), KnightsErrant(), KnightsOfTheRealm(), QuestingKnights(), GrailKnights(), GrailGuardians()
+                BattlePilgrims(), FootSquires(), MountedYeomen(), KnightsErrant(), KnightsOfTheRealm(), QuestingKnights(), GrailKnights(), GrailGuardians(),
+                PegasusKnights(), RoyalPegasusKnights()
         );
     }
 

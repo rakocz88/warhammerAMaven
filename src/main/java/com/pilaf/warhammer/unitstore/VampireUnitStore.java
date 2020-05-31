@@ -9,7 +9,8 @@ public class VampireUnitStore {
 
     public static List<Unit> all() {
         return Arrays.asList(
-
+            Zombies(), SkeletonSpearmen(), SkeletonWarriors(), CryptGhouls(), CairnWraiths(), GraveGuard(), GraveGuardGreatWeapons(), BlackKnights(), BlackKnightsLancesAndBarding(),
+                FellBats(), DireWolves(), BloodKnights(), CryptHorrors(), Hexwraiths(), Vargheists()
         );
     }
 

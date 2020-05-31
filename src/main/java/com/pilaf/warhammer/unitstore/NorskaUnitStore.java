@@ -9,7 +9,8 @@ public class NorskaUnitStore {
 
     public static List<Unit> all() {
         return Arrays.asList(
-
+                Marauders(), MaraudersGreatWeapons(), MarauderSpearmen(), MarauderChampions(), MarauderChampionsGreatWeapons(), MarauderBerserkers(), NorscanTrolls(), NorscanIceTrolls(),
+                FimirWarriors(), FimirWarriorsGreatWeapons(), SkinWolves(), SkinWolvesArmoured(), NorscanIceWolves(), NorscanWarhounds()
         );
     }
 

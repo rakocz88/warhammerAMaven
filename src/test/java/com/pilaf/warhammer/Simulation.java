@@ -39,4 +39,9 @@ public class Simulation {
         int wonGold = reports.stream().filter(report -> report.getEfficiencyGold().compareTo(BigDecimal.ONE) >=1).collect(Collectors.toList()).size();
         System.out.println("won: " + won + " gold : " + wonGold);
     }
+
+    @Test
+    void simulation2(){
+        CombinedStore.superCheapUnits();
+    }
 }

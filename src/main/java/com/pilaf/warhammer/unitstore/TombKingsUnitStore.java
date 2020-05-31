@@ -9,6 +9,8 @@ public class TombKingsUnitStore {
 
     public static List<Unit> all() {
         return Arrays.asList(
+                SkeletonWarriors(), SkeletonSpearmen(), NehekharaWarriors(), TombGuard(), TombGuardHalberds(), SkeletonHorsemen(), NehekharaHorsemen(),
+                NecropolisKnights(), NecropolisKnightsHalberds(), SepulchralStalkers(), Carrion(), Ushabti()
             );
     }
 

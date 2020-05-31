@@ -9,6 +9,8 @@ public class LizadrmenUnitStore {
 
     public static List<Unit> all() {
         return Arrays.asList(
+                SkinkCohort(), RedCrestedSkinks(), SaurusSpears(), SaurusWarriors(), SaurusSpearsShields(), SaurusWarriorsShields(), TempleGuards(),
+                Kroxigors(), SacredKroxigor(), ColdOneRiders(), ColdOneSpearRiders(), HornedOnes(), FeralColdOnes(), RipperdactylRiders()
         );
     }
 

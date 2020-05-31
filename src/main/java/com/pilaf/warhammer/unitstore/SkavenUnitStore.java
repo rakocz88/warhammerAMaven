@@ -9,7 +9,8 @@ public class SkavenUnitStore {
 
     public static List<Unit> all() {
         return Arrays.asList(
-
+                Skavenslaves(), SkavenslaveSpears(), Clanrats(), ClanratSpears(), ClanratsShields(), ClanratSpearsShields(), PlagueMonks(), PlagueMonkCenserBearers(),
+                StormverminHalberds(), StormverminSwordAndShield(), DeathRunners(), EshinTriads(), RatOgres(), WarpGrinders()
         );
     }
 
