@@ -339,7 +339,7 @@ public class BretoniaUnitStore {
                 .meleeInterval(4.7)
                 .bonusAgainstLarge(10)
                 .armor(80)
-                .skillsList(Arrays.asList( Skills.BRONZE_SHIELD))
+                .skillsList(Arrays.asList( Skills.BRONZE_SHIELD, Skills.FLYING))
                 .build();
     }
 
@@ -354,6 +354,7 @@ public class BretoniaUnitStore {
                 .leadership(70)
                 .speed(105)
                 .attack(42)
+                .physicalResistance(20)
                 .defence(30)
                 .chargeBonus(65)
                 .damage(42)
@@ -361,7 +362,7 @@ public class BretoniaUnitStore {
                 .meleeInterval(4.7)
                 .bonusAgainstLarge(12)
                 .armor(80)
-                .skillsList(Arrays.asList(Skills.BRONZE_SHIELD, Skills.PERFECT_VIGOUR, Skills.MAGICAL_ATTACK, Skills.IMMUNE_TO_PSYCHOLOGY))
+                .skillsList(Arrays.asList(Skills.BRONZE_SHIELD, Skills.PERFECT_VIGOUR, Skills.MAGICAL_ATTACK, Skills.IMMUNE_TO_PSYCHOLOGY, Skills.FLYING))
                 .build();
     }
 

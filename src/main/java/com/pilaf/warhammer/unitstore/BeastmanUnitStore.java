@@ -301,7 +301,7 @@ public class BeastmanUnitStore {
                 .damage(32)
                 .apDamage(12)
                 .chargeBonus(20)
-                .skillsList(Arrays.asList())
+                .skillsList(Arrays.asList(Skills.FLYING))
                 .build();
     }
 

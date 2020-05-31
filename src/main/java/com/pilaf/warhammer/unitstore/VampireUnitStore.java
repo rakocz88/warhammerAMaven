@@ -329,6 +329,7 @@ public class VampireUnitStore {
                 .apDamage(2)
                 .chargeBonus(6)
                 .skillsList(Arrays.asList(
+                        Skills.FLYING,
                         Skills.UNDEAD,
                         Skills.DISINTEGRATING,
                         Skills.CAUSE_FEAR))
@@ -409,6 +410,7 @@ public class VampireUnitStore {
                 .apDamage(38)
                 .chargeBonus(26)
                 .skillsList(Arrays.asList(
+                        Skills.FLYING,
                         Skills.FRENZY,
                         Skills.UNDEAD,
                         Skills.DISINTEGRATING,

@@ -173,7 +173,8 @@ public class VampireCoastUnitStore {
                 .skillsList(Arrays.asList(
                         Skills.CAUSE_FEAR,
                         Skills.UNDEAD,
-                        Skills.DISINTEGRATING))
+                        Skills.DISINTEGRATING,
+                        Skills.FLYING))
                 .build();
     }
 

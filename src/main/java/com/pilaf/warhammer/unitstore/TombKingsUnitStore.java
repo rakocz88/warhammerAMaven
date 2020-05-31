@@ -225,7 +225,8 @@ public class TombKingsUnitStore {
                 .skillsList(Arrays.asList(
                         Skills.CAUSE_FEAR,
                         Skills.DISINTEGRATING,
-                        Skills.UNDEAD))
+                        Skills.UNDEAD,
+                        Skills.FLYING))
                 .build();
     }
 

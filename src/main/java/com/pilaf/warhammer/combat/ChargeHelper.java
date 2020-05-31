@@ -12,15 +12,15 @@ public class ChargeHelper {
     @Autowired
     private final CombatConfig combatConfig;
 
-    public double calculateBonusAttack(Unit unit, Unit target){
-        if (shouldNotCalculateBonus(unit, target)){
+    public double calculateBonusAttack(Unit unit, Unit target) {
+        if (shouldNotCalculateBonus(unit, target)) {
             return 0;
         }
         return unit.getAttack() * calculateChargeBonusModifier(unit.getChargeBonus());
     }
 
-    public double calculateBonusDamage(double damage, Unit unit, Unit target){
-        if (shouldNotCalculateBonus(unit, target)){
+    public double calculateBonusDamage(double damage, Unit unit, Unit target) {
+        if (shouldNotCalculateBonus(unit, target)) {
             return 0;
         }
         return damage * calculateChargeBonusModifier(unit.getChargeBonus()) * (damage / (unit.getDamage() + unit.getApDamage()));
@@ -32,21 +32,22 @@ public class ChargeHelper {
                 || unit.getSkillsList().contains(Skills.CHARGE_DEFENCE_EXPERT)
                 || (unit.getSkillsList().contains(Skills.CHARGE_DEFENCE_AGAINST_LARGE) && target.getSize() == Size.LARGE)
                 || target.getSkillsList().contains(Skills.CHARGE_DEFENCE_EXPERT)
-                || (target.getSkillsList().contains(Skills.CHARGE_DEFENCE_AGAINST_LARGE) && unit.getSize() == Size.LARGE));
+                || (target.getSkillsList().contains(Skills.CHARGE_DEFENCE_AGAINST_LARGE) && unit.getSize() == Size.LARGE)
+                || (target.getSkillsList().contains(Skills.FLYING) && !unit.getSkillsList().contains(Skills.FLYING)));
     }
 
     private double calculateChargeBonusModifier(int chargeBonus) {
         double sum = 0;
-        for (int second = 0; second < CHARGE_BONUS_TIMEOUT; second++){
-            sum += (chargeBonus * (CHARGE_BONUS_TIMEOUT - second)/CHARGE_BONUS_TIMEOUT);
+        for (int second = 0; second < CHARGE_BONUS_TIMEOUT; second++) {
+            sum += (chargeBonus * (CHARGE_BONUS_TIMEOUT - second) / CHARGE_BONUS_TIMEOUT);
         }
-        if (combatConfig.getChargeStatus() == ChargeStatus.CYCLE){
-           sum =  sum / CHARGE_BONUS_TIMEOUT;
-        } else if (combatConfig.getChargeStatus() == ChargeStatus.STANDARD){
+        if (combatConfig.getChargeStatus() == ChargeStatus.CYCLE) {
+            sum = sum / CHARGE_BONUS_TIMEOUT;
+        } else if (combatConfig.getChargeStatus() == ChargeStatus.STANDARD) {
             sum = sum / (CHARGE_BONUS_TIMEOUT * 2);
-        } else if (combatConfig.getChargeStatus() == ChargeStatus.LOW){
+        } else if (combatConfig.getChargeStatus() == ChargeStatus.LOW) {
             sum = sum / (CHARGE_BONUS_TIMEOUT * 4);
         }
-        return sum /100;
+        return sum / 100;
     }
 }

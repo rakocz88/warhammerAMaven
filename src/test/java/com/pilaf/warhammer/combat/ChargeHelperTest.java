@@ -101,4 +101,28 @@ public class ChargeHelperTest {
         double resultAttack = Math.round(chargeHelper.calculateBonusAttack(unit1, unit2));
         assertThat(resultAttack).isEqualTo(32);
     }
+
+    @Test
+    void shouldNotCalculateChargeBonusIfTargetIsFlyingAndUnitIsNot(){
+        when(combatConfig.getChargeStatus()).thenReturn(ChargeStatus.CYCLE);
+        Unit unit1 = Unit.builder().size(Size.SMALL).damage(100).apDamage(100).chargeBonus(60).attack(100)
+                .skillsList(Collections.emptyList()).build();
+        Unit unit2 = Unit.builder().skillsList(Collections.singletonList(Skills.FLYING)).build();
+        double result = Math.round(chargeHelper.calculateBonusDamage(100, unit1, unit2));
+        assertThat(result).isEqualTo(0);
+        double resultAttack = Math.round(chargeHelper.calculateBonusAttack(unit1, unit2));
+        assertThat(resultAttack).isEqualTo(0);
+    }
+
+    @Test
+    void shouldCalculateChargeBonusIfTargetIsFlyingAndUnitIsFlying(){
+        when(combatConfig.getChargeStatus()).thenReturn(ChargeStatus.CYCLE);
+        Unit unit1 = Unit.builder().size(Size.SMALL).damage(100).apDamage(100).chargeBonus(60).attack(100)
+                .skillsList(Collections.singletonList(Skills.FLYING)).build();
+        Unit unit2 = Unit.builder().skillsList(Collections.singletonList(Skills.FLYING)).build();
+        double result = Math.round(chargeHelper.calculateBonusDamage(100, unit1, unit2));
+        assertThat(result).isEqualTo(16);
+        double resultAttack = Math.round(chargeHelper.calculateBonusAttack(unit1, unit2));
+        assertThat(resultAttack).isEqualTo(32);
+    }
 }

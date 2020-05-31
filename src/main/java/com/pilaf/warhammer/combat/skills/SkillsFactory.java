@@ -27,6 +27,10 @@ public class SkillsFactory {
             return new MartialProwess();
         } if (skills == Skills.MARTIAL_MASTERY){
             return new MartialMastery();
+        } if (skills == Skills.STRENTH_IN_NUMBERS){
+            return new StrenthInNumbers();
+        } if (skills == Skills.CHARMED){
+            return new Charmed();
         }
         return null;
     }

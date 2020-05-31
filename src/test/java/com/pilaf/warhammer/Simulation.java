@@ -26,8 +26,9 @@ public class Simulation {
     void simulation1() {
         List<Unit> listA = new ArrayList<>();
         List<Unit> listB = new ArrayList<>();
-        listA.add(NorskaUnitStore.SkinWolves());
-        listB.add(NorskaUnitStore.FimirWarriors());
+        listA.add(NorskaUnitStore.FimirWarriorsGreatWeapons());
+
+        listB.add(EmpireUnitStore.DemigryphKnightsHalberds());
         combatWithReport.init(
                listA,
                listB

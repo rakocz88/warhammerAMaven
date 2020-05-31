@@ -267,7 +267,7 @@ public class LizadrmenUnitStore {
                 .bonusAgainstInfantry(10)
                 .chargeBonus(52)
                 .skillsList(Arrays.asList(
-                        Skills.CAUSE_FEAR, Skills.FRENZY))
+                        Skills.CAUSE_FEAR, Skills.FRENZY, Skills.FLYING))
                 .build();
     }
 

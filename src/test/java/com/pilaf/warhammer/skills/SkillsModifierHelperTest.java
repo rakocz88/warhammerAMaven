@@ -252,4 +252,30 @@ public class SkillsModifierHelperTest {
         assertThat(defence).isEqualTo(106);
     }
 
+    @Test
+    void shouldStrenthInNumbersIncreaseDefenceAndLeadership(){
+        Unit unit1 = Unit.builder().skillsList(
+                Arrays.asList(Skills.STRENTH_IN_NUMBERS)
+        ).attack(100).damage(100).apDamage(100).hitPointsPerUnit(100).unitAmount(10).defence(100).speed(100).build();
+        Unit unit2 = Unit.builder().skillsList(
+                Arrays.asList()
+        ).attack(100).damage(100).apDamage(100).hitPointsPerUnit(100).unitAmount(10).defence(100).speed(100).build();
+        int defence = (int) Math.round(skillsModifierHelper.calculateDefenceAfterEffect(100, unit1, unit2));
+        int leadership = (int) Math.round(skillsModifierHelper.calculateLeadershipAfterEffect(100, unit1, unit2));
+        assertThat(defence).isEqualTo(104);
+        assertThat(leadership).isEqualTo(103);
+    }
+
+    @Test
+    void shouldCharmedDecreaseEnemyAttack(){
+        Unit unit1 = Unit.builder().skillsList(
+                Arrays.asList(Skills.CHARMED)
+        ).attack(100).damage(100).apDamage(100).hitPointsPerUnit(100).unitAmount(10).defence(100).speed(100).build();
+        Unit unit2 = Unit.builder().skillsList(
+                Arrays.asList()
+        ).attack(100).damage(100).apDamage(100).hitPointsPerUnit(100).unitAmount(10).defence(100).speed(100).build();
+        int attack = (int) Math.round(skillsModifierHelper.calculateAttackAfterEffect(100, unit2, unit1));
+        assertThat(attack).isEqualTo(91);
+    }
+
 }
