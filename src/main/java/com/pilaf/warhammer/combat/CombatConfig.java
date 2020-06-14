@@ -14,4 +14,5 @@ public class CombatConfig {
 
     private ChargeStatus chargeStatus;
     private List<DisciplineModifier> disciplineModifierList;
+    private boolean skipLeadership;
 }

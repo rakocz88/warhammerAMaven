@@ -128,7 +128,7 @@ public class SkavenUnitStore {
                 .attack(24)
                 .meleeInterval(4.3)
                 .defence(22)
-                .damage(26)
+                .damage(20)
                 .apDamage(6)
                 .chargeBonus(10)
                 .skillsList(Arrays.asList(

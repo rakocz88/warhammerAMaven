@@ -100,7 +100,6 @@ public class CombinedStore {
         // GREENSKINS
         unitsUnder.add(GreenskinsUnitStore.OrcBoyz());
         unitsUnder.add(GreenskinsUnitStore.NightGoblins());
-        unitsUnder.add(GreenskinsUnitStore.NastySkulkers());
         unitsUnder.add(GreenskinsUnitStore.SavageOrcs());
         // HIGH ELF
         unitsUnder.add(HighElvesUnitStore.Rangers());
@@ -122,6 +121,7 @@ public class CombinedStore {
         unitsUnder.add(WarriorsOfChaosUnitStore.ChaosMarauders());
         unitsUnder.add(WarriorsOfChaosUnitStore.ChaosMaraudersGreatWeapons());
         // WOOD ELF
+        unitsUnder.add(WoodElfsUnitStore.Dryads());
         return unitsUnder;
     }
 
@@ -199,7 +199,7 @@ public class CombinedStore {
         // SKAVEN
         unitsUnder.add(SkavenUnitStore.PlagueMonks());
         // TOMB KINGS
-        unitsUnder.add(SkavenUnitStore.PlagueMonks());
+        unitsUnder.add(TombKingsUnitStore.NehekharaWarriors());
         // VAMPIRE COAST
         // VAMPIRES
         unitsUnder.add(VampireUnitStore.CryptGhouls());

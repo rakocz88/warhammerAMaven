@@ -14,7 +14,8 @@ public class SimulationConfig {
         return new com.pilaf.warhammer.combat.CombatConfig(
                         ChargeStatus.STANDARD,
                         Arrays.asList(
-                        )
+                        ),
+                        false
                 );
     }
 }

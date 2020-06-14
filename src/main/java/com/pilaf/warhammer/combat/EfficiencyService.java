@@ -15,7 +15,7 @@ public class EfficiencyService {
     private final UnitService unitService;
     private final DisciplineHelper disciplineHelper;
     private final UnitSizeAttackHelper unitSizeAttackHelper;
-    public static final int EFFICIENCY_STANDARD = 285;
+    public static final int EFFICIENCY_STANDARD = 200;
 
     public Report calculateEfficiency(Unit unit1, Unit unit2) {
         Report report = new Report();

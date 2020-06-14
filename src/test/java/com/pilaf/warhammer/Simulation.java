@@ -28,18 +28,18 @@ public class Simulation {
 
         listB.add(EmpireUnitStore.DemigryphKnightsHalberds());
         combatWithReport.init(
-               listA,
-               listB
+                listA,
+                listB
         );
         List<Report> reports = combatWithReport.report();
         reports.stream().forEach(report -> System.out.println(report.printReport(false)));
-        int won = reports.stream().filter(report -> report.getOverallScore().compareTo(BigDecimal.ONE) >=1).collect(Collectors.toList()).size();
-        int wonGold = reports.stream().filter(report -> report.getEfficiencyGold().compareTo(BigDecimal.ONE) >=1).collect(Collectors.toList()).size();
+        int won = reports.stream().filter(report -> report.getOverallScore().compareTo(BigDecimal.ONE) >= 1).collect(Collectors.toList()).size();
+        int wonGold = reports.stream().filter(report -> report.getEfficiencyGold().compareTo(BigDecimal.ONE) >= 1).collect(Collectors.toList()).size();
         System.out.println("won: " + won + " gold : " + wonGold);
     }
 
     @Test
-    void simulation2(){
+    void simulation2() {
 
         List<Unit> listA = new ArrayList<>();
         List<Unit> listB = new ArrayList<>();
@@ -51,8 +51,8 @@ public class Simulation {
         );
         List<Report> reports = combatWithReport.report();
         reports.stream().forEach(report -> System.out.println(report.printReport(false)));
-        int won = reports.stream().filter(report -> report.getOverallScore().compareTo(BigDecimal.ONE) >=1).collect(Collectors.toList()).size();
-        int wonGold = reports.stream().filter(report -> report.getEfficiencyGold().compareTo(BigDecimal.ONE) >=1).collect(Collectors.toList()).size();
+        int won = reports.stream().filter(report -> report.getOverallScore().compareTo(BigDecimal.ONE) >= 1).collect(Collectors.toList()).size();
+        int wonGold = reports.stream().filter(report -> report.getEfficiencyGold().compareTo(BigDecimal.ONE) >= 1).collect(Collectors.toList()).size();
         BigDecimal offensiveRatting = reports.stream().map(Report::getAttackEfficiency).reduce(BigDecimal.ZERO, BigDecimal::add).divide(new BigDecimal(reports.size()), 2, RoundingMode.HALF_UP);
         BigDecimal defensiveRatting = reports.stream().map(Report::getDefenceEfficiency).reduce(BigDecimal.ZERO, BigDecimal::add).divide(new BigDecimal(reports.size()), 2, RoundingMode.HALF_UP);
         BigDecimal overallRatting = reports.stream().map(Report::getOverallScore).reduce(BigDecimal.ZERO, BigDecimal::add).divide(new BigDecimal(reports.size()), 2, RoundingMode.HALF_UP);
@@ -65,14 +65,14 @@ public class Simulation {
     }
 
     private List<Unit> prepareListA() {
-        List<Unit> unitsUnder =new ArrayList<>();
+        List<Unit> unitsUnder = new ArrayList<>();
         // BEASTMAN
 //        unitsUnder.add(BeastmanUnitStore.UngorHerd());
 //        // BRETONIA
 //        unitsUnder.add(BretoniaUnitStore.MenAtArms());
 //        unitsUnder.add(BretoniaUnitStore.MenAtArmsShields());
 //        // DARK ELVES
-//        unitsUnder.add(DarkElvenUnitStore.Bleakswords());
+        unitsUnder.add(DarkElvenUnitStore.Bleakswords());
 //        // DWARF
 //        unitsUnder.add(DwarfsUnitStore.DwarfWarriors());
 //        unitsUnder.add(DwarfsUnitStore.DwarfWarriorsGreatWeapons());
@@ -81,7 +81,6 @@ public class Simulation {
 //        // GREENSKINS
 //        unitsUnder.add(GreenskinsUnitStore.OrcBoyz());
 //        unitsUnder.add(GreenskinsUnitStore.NightGoblins());
-//        unitsUnder.add(GreenskinsUnitStore.NastySkulkers());
 //        unitsUnder.add(GreenskinsUnitStore.SavageOrcs());
 //        // HIGH ELF
 //        unitsUnder.add(HighElvesUnitStore.Rangers());
@@ -103,11 +102,12 @@ public class Simulation {
 //        unitsUnder.add(WarriorsOfChaosUnitStore.ChaosMarauders());
 //        unitsUnder.add(WarriorsOfChaosUnitStore.ChaosMaraudersGreatWeapons());
 //        // WOOD ELF
+//        unitsUnder.add(WoodElfsUnitStore.Dryads());
         return unitsUnder;
     }
 
     private List<Unit> prepareListB() {
-        return CombinedStore.cheapUnits();
+        return CombinedStore.middleLevelInfantryUnits();
     }
 
 

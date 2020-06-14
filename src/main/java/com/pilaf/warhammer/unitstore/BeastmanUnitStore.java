@@ -78,7 +78,7 @@ public class BeastmanUnitStore {
                 .attack(20)
                 .meleeInterval(4.2)
                 .defence(30)
-                .damage(22)
+                .damage(17)
                 .apDamage(5)
                 .bonusAgainstLarge(12)
                 .chargeBonus(6)

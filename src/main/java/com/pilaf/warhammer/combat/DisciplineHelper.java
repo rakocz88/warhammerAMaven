@@ -33,6 +33,9 @@ public class DisciplineHelper {
     }
 
     private int calculateDamageUnitUnitLosesAllLeadership(Unit unit, int disciplineLeft) {
+        if (combatConfig.isSkipLeadership()){
+            return  Math.round(unit.getHitPointsPerUnit() * unit.getUnitAmount());
+        }
         double percentReachableBeforeLeadershipIsZero = (1 - (0.75 - (((double) disciplineLeft) / 100)));
         int damageBeforeLeadershipIsZero =  (int) Math.round(unit.getHitPointsPerUnit() * unit.getUnitAmount() * percentReachableBeforeLeadershipIsZero);
         return damageBeforeLeadershipIsZero > (unit.getUnitAmount() * unit.getHitPointsPerUnit())
