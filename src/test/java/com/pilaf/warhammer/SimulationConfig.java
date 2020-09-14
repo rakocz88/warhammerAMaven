@@ -12,7 +12,7 @@ public class SimulationConfig {
     @Bean
     public com.pilaf.warhammer.combat.CombatConfig combatConfig(){
         return new com.pilaf.warhammer.combat.CombatConfig(
-                        ChargeStatus.STANDARD,
+                        ChargeStatus.NONE,
                         Arrays.asList(
                         ),
                         false
