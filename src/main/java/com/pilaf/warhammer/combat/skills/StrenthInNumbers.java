@@ -17,7 +17,7 @@ public class StrenthInNumbers implements SkillsEffect {
 
     @Override
     public double calculateDefenceAfterEffect(Unit unit, Unit target, double defence) {
-        return defence + (8/2);
+        return defence + (8 * timeMod());
     }
 
     @Override
@@ -27,6 +27,10 @@ public class StrenthInNumbers implements SkillsEffect {
 
     @Override
     public double calculateLeadershipAfterEffect(Unit unit, Unit target, double leadership) {
-        return leadership + (6/2);
+        return leadership + (6 * timeMod());
+    }
+
+    public double timeMod(){
+        return 0.65;
     }
 }
