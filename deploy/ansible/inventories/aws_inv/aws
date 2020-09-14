@@ -1,0 +1,2 @@
+[all]
+ec2_warhammer ansible_host=ADDR_IP
