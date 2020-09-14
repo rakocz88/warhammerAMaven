@@ -35,6 +35,7 @@ public class ChargeHelperTest {
 
     @Test
     void chargeTest2(){
+        //
         when(combatConfig.getChargeStatus()).thenReturn(ChargeStatus.CYCLE);
         Unit unit1 = Unit.builder().damage(100).apDamage(100).chargeBonus(60).attack(100).skillsList(new ArrayList<>()).build();
         Unit unit2 = Unit.builder().skillsList(new ArrayList<>()).build();
